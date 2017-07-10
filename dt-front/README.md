@@ -1,35 +1,28 @@
-## 环境依赖
-```$xslt
-npm install  webpack webpack-dev-server --save-dev
-npm install  vue-loader --save-dev
-npm install  vue-html-loader --save-dev
-npm install  css-loader --save-dev
-npm install  vue-style-loader --save-dev
-npm install  vue-hot-reload-api --save-dev
-npm install  babel-loader --save-dev
-npm install  babel-core --save-dev
-npm install  babel-plugin-transform-runtime --save-dev
-npm install  babel-preset-es2015 --save-dev
-npm install  babel-runtime@5 --save-dev
-//vue template支持
-npm install  vue-template-compiler --save-dev
-//hash 文件加入到html
-npm install html-webpack-plugin --save-dev
-npm install vue-router --save-dev
-import Vuex from 'vuex'
-//测试
-npm install webpack-dev-middleware webpack-hot-middleware --save-dev
-npm install express --save-dev
+# dt-front
 
-//vue
-npm install vue –save
-npm install vue-router --save
-```
+> 当前根目录命令
 
-## 本地运行
-```$xslt
-npm install
-npm run webpack
-node dev-server.js
+# 初始化所有前端项目（home、admin）：
+npm run i-all
 
-```
+# 启动home项目的服务（prod）：
+npm run home
+
+# 启动admin项目的服务（prod）：
+npm run admin
+
+# 启动所有项目的服务（prod）：
+npm run all
+## 注：启动服务需先打包项目
+
+
+> 项目命令（先cd进入项目根目录）
+
+#以开发状态启动项目
+npm run dev
+
+#打包项目
+npm run build
+
+#检测代码错误
+npm run lint
