@@ -14,8 +14,8 @@ target
 .settings
 .metadata
 
-/dt-front/node_modules/*
-/dt-front/.idea/*
-/dt-front/.eclispe/*
-/dt-front/build/*
-/dt-front/npm-debug.log
+node_modules
+.idea
+.eclispe
+build
+npm-debug.log
