@@ -14,8 +14,8 @@ target
 .settings
 .metadata
 
-node_moudules/
+node_moudules
 .idea
 .eclispe
-build/
+build
 npm-debug.log
