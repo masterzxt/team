@@ -1,0 +1,5 @@
+node_moudules
+.idea
+.eclispe
+build
+npm-debug.log
