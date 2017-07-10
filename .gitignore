@@ -14,8 +14,8 @@ target
 .settings
 .metadata
 
-node_moudules
-.idea
-.eclispe
-build
-npm-debug.log
+dt-front/node_moudules
+dt-front/.idea
+dt-front/.eclispe
+dt-front/build
+dt-front/npm-debug.log
