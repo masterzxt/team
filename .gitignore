@@ -14,7 +14,7 @@ target
 .settings
 .metadata
 
-/dt-front/node_moudules/*
+/dt-front/node_modules/*
 /dt-front/.idea/*
 /dt-front/.eclispe/*
 /dt-front/build/*
