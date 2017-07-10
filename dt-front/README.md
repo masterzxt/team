@@ -27,3 +27,16 @@ npm run build
 
 > 检测代码错误<br />
 npm run lint
+
+
+## 跑起来
+#### 1.下载所有项目需要的包：
+npm run i-all
+
+#### 2.cd到home目录打包项目(admin同)：
+npm run build
+
+#### 3.cd ../到dt-front目录把服务跑起来：
+npm run all
+
+#### 其他的参考命令列表
