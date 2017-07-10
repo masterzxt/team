@@ -2,16 +2,16 @@
 
 ## 当前根目录命令
 
-> 初始化所有前端项目（home、admin）：
+> 初始化所有前端项目（home、admin）
 npm run i-all
 
-> 启动home项目的服务（prod）：
+> 启动home项目的服务（prod）
 npm run home
 
-> 启动admin项目的服务（prod）：
+> 启动admin项目的服务（prod）
 npm run admin
 
-> 启动所有项目的服务（prod）：
+> 启动所有项目的服务（prod）
 npm run all
 
 > 注：启动服务需先打包项目
