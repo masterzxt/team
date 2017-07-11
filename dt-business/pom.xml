@@ -13,7 +13,7 @@
         <module>business-common</module>
         <module>business-dao</module>
         <module>business-web</module>
-        <module>dt-service</module>
+        <module>business-service</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
