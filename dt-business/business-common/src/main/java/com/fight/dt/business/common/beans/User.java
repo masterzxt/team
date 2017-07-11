@@ -7,20 +7,20 @@ import java.util.Date;
  */
 public class User {
 
-    private Long id;
+    private Integer id;
     private String username;
     private String password;
-    private String phone;
-    private String email;
-    private Date createDate;
-    private Date modifyDate;
-    private boolean deleted;
-
-    public Long getId() {
+    private String name;
+    private String sex;
+    private String birthday;
+    private String registTime;
+    private String status;
+    private String updateTime;
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -40,43 +40,51 @@ public class User {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getName() {
+        return name;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getSex() {
+        return sex;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
-    public Date getModifyDate() {
-        return modifyDate;
+    public String getRegistTime() {
+        return registTime;
     }
 
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
+    public void setRegistTime(String registTime) {
+        this.registTime = registTime;
     }
 
-    public boolean getDeleted() {
-        return deleted;
+    public String getUpdateTime() {
+        return updateTime;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
