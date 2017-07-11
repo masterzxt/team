@@ -9,11 +9,12 @@
 ```$xslt
  maven clean install
 ```
-* business-web 运行 Application.main
+* business-web 运行 Application.main [ps:vm options 加上： -Dspring.profiles.active=dev]
+![示例图](http://7xo6kd.com1.z0.glb.clouddn.com/upload-ueditor-image-20170711-1499756378710052966.png)
 ```$xslt
-http://localhost:8080
+http://localhost:18888
 ```
 * swagger API
 ```$xslt
-http://localhost:8080/swagger-ui.html
+http://localhost:18888/swagger-ui.html
 ```
