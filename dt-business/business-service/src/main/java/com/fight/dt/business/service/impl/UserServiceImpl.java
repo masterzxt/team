@@ -3,15 +3,16 @@ package com.fight.dt.business.service.impl;
 import com.fight.dt.business.common.beans.User;
 import com.fight.dt.business.dao.UserDao;
 import com.fight.dt.business.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * Created by zhangwei on 17/7/11.
  */
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
-    @Autowired
+    @Resource
     private UserDao userDao;
 
     @Override

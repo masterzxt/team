@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 /**
  * Created by tpx on 2017/7/10.
  */
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("User")
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    @Autowired
+    @Resource
     private UserService userService;
 
     @ApiOperation(value="用户信息", notes="根据User的id获取用户信息")

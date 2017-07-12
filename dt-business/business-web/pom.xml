@@ -29,6 +29,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>1.5.4.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>1.5.4.RELEASE</version>
+        </dependency>
         <!-- swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -46,12 +51,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.42</version>
             <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

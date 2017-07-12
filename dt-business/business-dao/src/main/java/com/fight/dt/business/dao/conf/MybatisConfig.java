@@ -20,7 +20,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableConfigurationProperties(MybatisProperties.class)
-@MapperScan(basePackages = "com.fight.dt.business.dao")
+@MapperScan(basePackages = "com.fight.dt.business.dao.mapper")
 public class MybatisConfig {
     @Autowired
     private Environment env;
