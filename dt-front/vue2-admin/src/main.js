@@ -9,8 +9,6 @@ import 'iview/dist/styles/iview.css';
 
 
 Vue.use(VueRouter);
-
-
 Vue.use(iView);
 
 
@@ -32,8 +30,6 @@ router.afterEach(() => {
     iView.LoadingBar.finish();
     window.scrollTo(0, 0);
 });
-
-
 
 new Vue({
     el: '#app',

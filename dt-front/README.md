@@ -30,6 +30,7 @@ npm run lint
 
 
 ## 跑起来
+
 #### 0.准备：
 [安装node(最好是v7.0.0以上)](http://nodejs.cn/)，安装好后到dt-front按序执行以下命令
 

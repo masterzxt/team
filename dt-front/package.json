@@ -7,7 +7,11 @@
     "i-all": "npm i && cd ./vue2-home && npm i && cd ../vue2-admin && npm i",
     "home": "node index home",
     "admin": "node index admin",
-    "all": "node index home admin"
+    "all": "node index home admin",
+    "dev-home-server": "node dev-proxy home",
+    "dev-admin-server": "node dev-proxy admin",
+    "dev-home": "cd ./vue2-home && npm run dev",
+    "dev-admin": "cd ./vue2-admin && npm run dev"
   },
   "dependencies": {
     "express": "^4.15.3",

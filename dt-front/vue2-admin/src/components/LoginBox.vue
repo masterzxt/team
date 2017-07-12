@@ -19,6 +19,9 @@
     position: absolute;
     left: 0;
     width: 40px;
+    height: 42px;
+    line-height: 42px;
+    top: 0;
   }
   .input.focus .icon{
     color: #2d8cf0;
@@ -77,27 +80,31 @@
 </template>
 
 <script>
-export default {
-  name: 'login-box',
-  data () {
-    return {
-      loading: false,
-      current: ''
-    }
-  },
-  methods: {
-    login: function () {
-      if (!this.loading) {
-        this.loading = true
-        let that = this
-        setTimeout(function () {
-          that.loading = false
-        }, 1000)
+  import Util from '../libs/util';
+  export default {
+    name: 'login-box',
+    data () {
+      return {
+        loading: false,
+        current: ''
       }
     },
-    focus: function (e) {
-      this.current = e.target.className
+    methods: {
+      login: function () {
+        if (!this.loading) {
+          this.loading = true
+          let that = this
+          Util.ajax.post('/login').then(function (res) {
+            console.log(res.data);
+          });
+          setTimeout(function () {
+            that.loading = false
+          }, 1000)
+        }
+      },
+      focus: function (e) {
+        this.current = e.target.className
+      }
     }
   }
-}
 </script>
