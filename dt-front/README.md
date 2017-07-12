@@ -33,8 +33,7 @@ npm run dev-home
 以后台接口http://localhost:8010/index/test 为例 （get请求方便测试）<br>
 在浏览器打开http://localhost:8000/api/index/test （看显示的内容是否为接口返回内容）<br>
 原理是将home（ http://localhost:8000/api/ ）的请求代理到后台（ http://localhost:8010/ ）,后面路径一致
-
-
+<br><br>
 ## 当前根目录命令
 
 > 初始化所有前端项目（home、admin）<br />
@@ -57,7 +56,7 @@ npm run all
 
 > 注：启动服务（prod）需先打包项目，启动服务（dev）会自动打包项目<br>
 dev和prod的区别，前者是开发时运行项目，后者是打包成产品
-
+<br><br>
 ## 项目命令（先cd进入项目根目录）
 
 > 以开发状态启动项目<br />
@@ -68,8 +67,7 @@ npm run build
 
 > 检测代码错误<br />
 npm run lint
-
-
+<br><br>
 ## 跑起来
 #### 0.准备：
 [安装node(最好是v7.0.0以上)](http://nodejs.cn/)，安装好后到dt-front按序执行以下命令
