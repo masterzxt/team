@@ -4,6 +4,7 @@ import com.fight.dt.business.service.impl.DtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Resource
@@ -36,10 +38,10 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("11111111111111111");
-       /* auth
+       /* System.out.println("11111111111111111");
+        auth
                 .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");*/
+                .withUser("user").password("password").roles("LOGIN");*/
 
         auth.userDetailsService(dtUserDetailsService);
     }
