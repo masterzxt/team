@@ -34,6 +34,7 @@ npm run dev-home
 在浏览器打开http://localhost:8000/api/index/test （看显示的内容是否为接口返回内容）<br>
 原理是将home（ http://localhost:8000/api/ ）的请求代理到后台（ http://localhost:8010/ ）,后面路径一致
 
+
 ## 当前根目录命令
 
 > 初始化所有前端项目（home、admin）<br />
@@ -44,6 +45,12 @@ npm run home
 
 > 启动admin项目的服务（prod）<br />
 npm run admin
+
+> 启动home项目的服务（dev）<br />
+npm run dev-home
+
+> 启动admin项目的服务（dev）<br />
+npm run dev-admin
 
 > 启动所有项目的服务（prod）<br />
 npm run all
