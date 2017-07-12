@@ -37,7 +37,7 @@ public class UserController {
     @ResponseBody
     public String getUserById(Integer id){
         User user = userService.getUserById(id);
-        logger.info(user.getName());
+        logger.info(user.getUsername());
         logger.info(user.getUsername());
         logger.info(user.getPassword());
         return "success!";

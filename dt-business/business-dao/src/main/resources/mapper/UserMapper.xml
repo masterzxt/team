@@ -4,7 +4,7 @@
 <mapper namespace="com.fight.dt.business.dao.mapper.UserMapper">
 
     <select id="getUserById" parameterType="Integer" resultType="com.fight.dt.business.common.beans.User">
-        SELECT id, username, password, name, sex, birthday, regist_time as registTime,
+        SELECT id, username, password, nickname, sex, birthday, create_time as createTime,
         status, update_time as updateTime
         FROM user u
         <where>
@@ -13,7 +13,7 @@
     </select>
 
     <select id="findByUsername" parameterType="String" resultType="com.fight.dt.business.common.beans.User">
-        SELECT id, username, password, name, sex, birthday, regist_time as registTime,
+        SELECT id, username, password, nickname, sex, birthday, create_time as registTime,
         status, update_time as updateTime
         FROM user u
         <where>

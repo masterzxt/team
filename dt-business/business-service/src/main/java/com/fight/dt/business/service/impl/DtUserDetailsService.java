@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ public class DtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         System.out.println("======================="+username);
+        System.out.println("======================="+new BCryptPasswordEncoder().encode(username));
         com.fight.dt.business.common.beans.User u = userDao.findByUsername(username);
         if(u == null){
             throw new UsernameNotFoundException("用户名或密码错误！");

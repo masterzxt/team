@@ -10,10 +10,10 @@ public class User {
     private Integer id;
     private String username;
     private String password;
-    private String name;
+    private String nickname;
     private String sex;
     private String birthday;
-    private String registTime;
+    private String createTime;
     private String status;
     private String updateTime;
     public Integer getId() {
@@ -40,12 +40,12 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getNickName() {
+        return nickname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickName(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getSex() {
@@ -64,12 +64,12 @@ public class User {
         this.birthday = birthday;
     }
 
-    public String getRegistTime() {
-        return registTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setRegistTime(String registTime) {
-        this.registTime = registTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getUpdateTime() {
