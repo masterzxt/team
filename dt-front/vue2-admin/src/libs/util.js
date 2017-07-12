@@ -9,10 +9,8 @@ util.title = function(title) {
     window.document.title = title;
 };
 
-const ajaxUrl = env === 'development' ?
-    'http://127.0.0.1:8888' :
-    env === 'production' ?
-    'https://www.url.com' :
+const ajaxUrl = env === 'development' ? '/api/' :
+    env === 'production' ? '/api/' :
     'https://debug.url.com';
 
 util.ajax = axios.create({
