@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Resource
@@ -31,14 +31,18 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll() //匿名访问
-                .anyRequest().authenticated() //认证访问
+                .antMatchers("/api/**").authenticated() //认证访问
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login")                 //表单登录
+                .defaultSuccessUrl("/api/user/name") //登录成功访问
                 .permitAll()   //登陆页匿名访问
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()   //退出登陆允许访问
+                .and()
+                .csrf()
+                .disable(); //session不保存在服务器
     }
 
     @Bean
