@@ -2,7 +2,8 @@
 
 </style>
 <template>
-    <div class="-index">
+    <div class="-empty">
+        404
     </div>
 </template>
 <script>

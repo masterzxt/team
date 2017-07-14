@@ -1,91 +1,125 @@
-html {
-    color:black;
-    font:13px "微软雅黑",arial,sans-serif;
-    background: #efefef;
+/*reset*/
+/* 清除内外边距 */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
+th, td { /* table elements 表格元素 */
+    margin: 0;
+    padding: 0;
 }
-/* 内外边距通常让各个浏览器样式的表现位置不同 */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
-    margin:0;
-    padding:0;
+
+/* 设置默认字体 */
+body,
+button, input, select, textarea { /* for ie */
+    font: 7rem/1 "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif; /* 用 ascii 字符表示，使得在任何编码下都无问题 */
 }
-/* 要注意表单元素并不继承父级 font 的问题 */
-body,button,input,select,textarea {
-    font:13px "微软雅黑",arial,sans-serif;
+h1,h2,h3,h4,h5,h6{
+    font-weight: normal;
 }
-input,select,textarea {
-    font-size:100%;
-}
-/* 去掉 table cell 的边距并让其边重合 */
-table {
-    border-collapse:collapse;
-    border-spacing:0;
-}
-/* ie bug：th 不继承 text-align */
-th {
-    text-align:inherit;
-}
-/* 去除默认边框 */
-fieldset,img {
-    border:none;
-}
-/* ie6 7 8(q) bug 显示为行内表现 */
-iframe {
-    display:block;
-}
-/* 去掉 firefox 下此元素的边框 */
-abbr,acronym {
-    border:none;
-    font-variant:normal;
-}
-/* 一致的 del 样式 */
-del {
-    text-decoration:line-through;
-}
-address,caption,cite,code,dfn,em,th,var {
-    font-style:normal;
-    font-weight:500;
-}
-/* 去掉列表前的标识，li 会继承 */
-ol,ul {
-    list-style:none;
-}
-/* 对齐是排版最重要的因素，别让什么都居中 */
-caption,th {
-    text-align:left;
-}
-/* 来自yahoo，让标题都自定义，适应多个系统应用 */
-h1,h2,h3,h4,h5,h6 {
-    font-size:100%;
-    font-weight:500;
-}
-q:before,q:after {
-    content:'';
-}
-/* 统一上标和下标 */
-sub,sup {
-    font-size:75%;
-    line-height:0;
-    position:relative;
-    vertical-align:baseline;
-}
-sup {
-    top:-0.5em;
-}
-sub {
-    bottom:-0.25em;
-}
-/* 让链接在 hover 状态下显示下划线 */
-a:hover {
-    text-decoration:underline;
-}
-/* 默认不显示下划线，保持页面简洁 */
-ins,a {
-    text-decoration:none;
-}
-/* 去除 ie6 & ie7 焦点点状线 */
+h1 { font-size: 1.5rem; /* 18px / 12px = 1.5 */ }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1rem; }
+h4 { font-size: .85rem; }
+h5 { font-size: .75rem; }
+h6 { font-size: .65rem; }
+
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp, tt { font-family: "Courier New", Courier, monospace; } /* 统一等宽字体 */
+small { font-size: .6rem; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/* 重置列表元素 */
+ul, ol { list-style: none; }
+
+/* 重置文本格式元素 */
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
 a:focus,*:focus {
     outline:none;
 }
+a[href]{
+    color: #479cff;
+}
+abbr[title], acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
+    border-bottom: 1px dotted;
+    cursor: help;
+}
+
+q:before, q:after { content: ''; }
+
+/* 重置表单元素 */
+legend { color: #000; } /* for ie6 */
+fieldset, img, audio, video { border: none;display: block } /* img 搭车：让链接里的 img 无边框 */
+/* 注：optgroup 无法扶正 */
+button, input, select, textarea {
+    font-size: 100%; /* 使得表单元素在 ie 下能继承字体大小 */
+}
+
+/* 重置表格元素 */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 重置 hr */
+hr {
+    border: none;
+    height: 1px;
+}
+
+img{
+    display: block;
+}
+
+/*-- 默认Android -------------------------------------------*/
+html{font-size: 20px;background: #fff;}
+body{font-size: .8rem;min-width: 300px;color: #101010; }
+@media only screen and (max-width:320px){
+    html{font-size: 17.5px;}
+}
+@media only screen and (max-width:480px){
+    html{font-size: 18px;}
+}
+@media only screen and (max-width:560px){
+    html{font-size: 20px;}
+}
+
+/*-- 兼容iphone4/4s -------------------------------------------*/
+@media (device-height:480px) and (-webkit-min-device-pixel-ratio:2){
+    html{font-size: 18px;}
+}
+
+
+/*-- 兼容iphone5 -----------------------------------------*/
+@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){
+    html{font-size: 20px;}
+}
+
+
+/*-- 兼容iphone 6 --------------------------------------------*/
+@media (device-width:375px) and (-webkit-min-device-pixel-ratio:2){
+    html{font-size: 20px;}
+}
+
+
+/*-- 兼容iphone6 plus --------------------------------------------*/
+@media (device-width:414px) and (-webkit-min-device-pixel-ratio:3.0){
+    html{font-size: 23px;}
+}
+
+
+/*-- 兼容 iPad 3 & 4 ------------------------------------------*/
+@media only screen and (min-device-width:768px) and (max-device-width:1024px) and (-webkit-min-device-pixel-ratio:2){
+    html {
+        font-size: 30px;
+    }
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 /* 清除浮动 */
 .clearfix:before,.clearfix:after {
     content:"";
@@ -94,9 +128,6 @@ a:focus,*:focus {
 .clearfix:after {
     clear:both;
     overflow:hidden;
-}
-.clearfix {
-    zoom:1; /* for ie6 & ie7 */
 }
 .clear {
     clear:both;
@@ -122,4 +153,19 @@ a:focus,*:focus {
 }
 .fr {
     float:right;
+}
+.btn{
+    color: #fff;
+    background-color: #479CFF;
+    border-color: #479CFF;
+    text-align: center;
+    padding: .65rem 0;
+    cursor: pointer;
+    transition: opacity .6s,background .6s;
+    opacity: .85;
+}
+
+#body{
+    max-width: 844px;
+    margin: 0 auto;
 }

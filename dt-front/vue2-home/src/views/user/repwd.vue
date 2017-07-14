@@ -2,7 +2,8 @@
 
 </style>
 <template>
-    <div class="-index">
+    <div class="-user-repwd">
+        重置密码
     </div>
 </template>
 <script>

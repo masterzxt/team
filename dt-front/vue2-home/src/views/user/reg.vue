@@ -2,7 +2,8 @@
 
 </style>
 <template>
-    <div class="-index">
+    <div class="-user-reg">
+        用户注册
     </div>
 </template>
 <script>
