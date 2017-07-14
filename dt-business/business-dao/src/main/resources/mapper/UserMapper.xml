@@ -22,4 +22,10 @@
         limit 0,1
     </select>
 
+    <insert id="addUser" parameterType="com.fight.dt.business.common.beans.User" >
+        INSERT INTO user (id, username, password, nickname, sex, birthday,phone,email, create_time,status,update_time) values (
+        #{id},#{username},#{password},#{nickname},#{sex},#{birthday},#{phone},#{email},#{createTime},#{status},#{updateTime}
+        )
+    </insert>
+
 </mapper>

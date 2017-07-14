@@ -7,4 +7,5 @@ import com.fight.dt.business.common.beans.User;
  */
 public interface UserService {
     User getUserById(Integer id);
+    Integer addUser(User user);
 }

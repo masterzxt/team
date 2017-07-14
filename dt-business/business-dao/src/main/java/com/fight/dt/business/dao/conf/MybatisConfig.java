@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -27,6 +28,7 @@ public class MybatisConfig {
     @Autowired
     private MybatisProperties properties;
 
+    @Bean
     public DataSource getDataSource() throws Exception{
         Properties props = new Properties();
         props.put("driverClassName", env.getProperty("spring.datasource.driver-class-name"));
@@ -46,4 +48,10 @@ public class MybatisConfig {
                 .getResources(env.getProperty("spring.mybatis.mapper-locations")));
         return fb.getObject();
     }
+
+    @Bean(name = "customTransactionManager")
+    public DataSourceTransactionManager transactionManager(DataSource rdsDataSource) {
+        return new DataSourceTransactionManager(rdsDataSource);
+    }
+
 }

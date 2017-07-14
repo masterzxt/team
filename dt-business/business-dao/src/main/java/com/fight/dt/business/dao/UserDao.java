@@ -10,4 +10,6 @@ import org.springframework.stereotype.Component;
 public interface UserDao {
     User getUserById(Integer id);
     User findByUsername(String username);
+
+    Integer addUser(User user);
 }

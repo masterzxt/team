@@ -23,4 +23,9 @@ public class UserDaoImpl implements UserDao{
     public  User findByUsername(String username){
         return userMapper.findByUsername(username);
     }
+
+    @Override
+    public Integer addUser(User user) {
+        return userMapper.addUser(user);
+    }
 }

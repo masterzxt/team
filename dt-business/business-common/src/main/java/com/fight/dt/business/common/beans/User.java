@@ -15,7 +15,48 @@ public class User {
     private String birthday;
     private String createTime;
     private String status;
+    private String phone;
+    private String email;
     private String updateTime;
+
+    public User (String username,String password,String nickname,String sex, String birthday, String createTime,
+                 String status, String phone, String email,String updateTime){
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.createTime = createTime;
+        this.status = status;
+        this.phone = phone;
+        this.email = email;
+        this.updateTime = updateTime;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public Integer getId() {
         return id;
     }
