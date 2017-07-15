@@ -20,16 +20,13 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User getUserById(Integer id) {
-        return userDao.getUserById(id);
+    public User findById(Integer id) {
+        return userDao.findById(id);
     }
 
     @Transactional
     @Override
-    public Integer addUser(User user) {
-        User user1  = new User("1","1","1","11111","1","2017-07-14","1","1","1","2017-07-14");
-        userDao.addUser(user);
-        userDao.addUser(user1);
-        return 1;
+    public int insert(User user) {
+        return userDao.insert(user);
     }
 }

@@ -13,25 +13,11 @@ public class User {
     private String nickname;
     private String sex;
     private String birthday;
-    private String createTime;
+    private Date createTime;
     private String status;
     private String phone;
     private String email;
-    private String updateTime;
-
-    public User (String username,String password,String nickname,String sex, String birthday, String createTime,
-                 String status, String phone, String email,String updateTime){
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.sex = sex;
-        this.birthday = birthday;
-        this.createTime = createTime;
-        this.status = status;
-        this.phone = phone;
-        this.email = email;
-        this.updateTime = updateTime;
-    }
+    private Date updateTime;
 
     public String getEmail() {
         return email;
@@ -105,19 +91,19 @@ public class User {
         this.birthday = birthday;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 

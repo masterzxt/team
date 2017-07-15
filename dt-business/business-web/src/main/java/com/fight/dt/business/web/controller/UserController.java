@@ -50,7 +50,7 @@ public class UserController {
     @ApiImplicitParam(name = "id", value = "用户的id", required = true, dataType = "Long")
     @ResponseBody
     public String getUserById(Integer id){
-        User user = userService.getUserById(id);
+        User user = userService.findById(id);
         logger.info(user.getUsername());
         logger.info(user.getUsername());
         logger.info(user.getPassword());

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * Created by tpx on 2017/7/12.
@@ -29,9 +30,8 @@ public class IndexController {
 
     @RequestMapping("/adduser")
     @ResponseBody
-    public String adduser(){
-        User user  = new User("2","2","2","2","2","2017-07-14","2","2","2","2017-07-14");
-        userService.addUser(user);
+    public String adduser(User user){
+        userService.insert(user);
         return "200";
     }
 }

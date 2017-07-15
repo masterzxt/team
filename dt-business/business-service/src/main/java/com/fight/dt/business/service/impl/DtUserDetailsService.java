@@ -31,7 +31,6 @@ public class DtUserDetailsService implements UserDetailsService {
         logger.info("======================="+username);
         logger.info("======================="+new BCryptPasswordEncoder().encode(username));
         com.fight.dt.business.common.beans.User u = userDao.findByUsername(username);
-        logger.info("=============getNickname=========="+u.getNickname());
         if(u == null){
             logger.info("=======================null");
             throw new UsernameNotFoundException("用户名或密码错误！");
