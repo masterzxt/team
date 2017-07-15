@@ -1,6 +1,7 @@
-package com.fight.dt.business.dao.conf;
+package com.fight.dt.business.web.conf;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.fight.dt.business.dao.mapper.UserMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -12,7 +13,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -21,37 +24,37 @@ import java.util.Properties;
  */
 @Configuration
 @EnableConfigurationProperties(MybatisProperties.class)
-@MapperScan(basePackages = "com.fight.dt.business.dao.mapper")
-public class MybatisConfig {
-    @Autowired
-    private Environment env;
-    @Autowired
-    private MybatisProperties properties;
+@MapperScan(basePackageClasses = {UserMapper.class})
+@EnableTransactionManagement
+public class MybatisConf {
+    @Resource
+    private Environment environment;
+    @Resource
+    private DataSource dataSource;
 
     @Bean
-    public DataSource getDataSource() throws Exception{
+    public DataSource dataSource() throws Exception{
         Properties props = new Properties();
-        props.put("driverClassName", env.getProperty("spring.datasource.driver-class-name"));
-        props.put("url", env.getProperty("spring.datasource.url"));
-        props.put("username", env.getProperty("spring.datasource.username"));
-        props.put("password", env.getProperty("spring.datasource.password"));
+        props.put("driverClassName", environment.getProperty("spring.datasource.driver-class-name"));
+        props.put("url", environment.getProperty("spring.datasource.url"));
+        props.put("username", environment.getProperty("spring.datasource.username"));
+        props.put("password", environment.getProperty("spring.datasource.password"));
         return DruidDataSourceFactory.createDataSource(props);
     }
 
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
-        DataSource dataSource = getDataSource();
         SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
         fb.setDataSource(dataSource);
-        fb.setTypeAliasesPackage(env.getProperty("spring.mybatis.type-aliases-package"));
+        fb.setTypeAliasesPackage(environment.getProperty("spring.mybatis.type-aliases-package"));
         fb.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources(env.getProperty("spring.mybatis.mapper-locations")));
+                .getResources(environment.getProperty("spring.mybatis.mapper-locations")));
         return fb.getObject();
     }
 
-    @Bean(name = "customTransactionManager")
-    public DataSourceTransactionManager transactionManager(DataSource rdsDataSource) {
-        return new DataSourceTransactionManager(rdsDataSource);
+    @Bean
+    public DataSourceTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource);
     }
 
 }

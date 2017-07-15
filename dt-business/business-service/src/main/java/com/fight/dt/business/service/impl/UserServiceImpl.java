@@ -14,7 +14,6 @@ import javax.annotation.Resource;
  * Created by zhangwei on 17/7/11.
  */
 
-@EnableTransactionManagement
 @Service("userService")
 public class UserServiceImpl implements UserService {
     @Resource

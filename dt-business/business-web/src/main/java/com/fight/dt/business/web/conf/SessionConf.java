@@ -16,9 +16,9 @@ import java.util.concurrent.CountDownLatch;
 
 @Configuration
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60*60*3)
-public class SessionConfig {
+public class SessionConf {
 
-    private static final Logger log = LoggerFactory.getLogger(SessionConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(SessionConf.class);
 
     @Bean
     RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
