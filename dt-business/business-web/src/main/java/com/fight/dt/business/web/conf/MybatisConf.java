@@ -23,15 +23,11 @@ import java.util.Properties;
  * Created by zhangwei on 17/7/11.
  */
 @Configuration
-@EnableConfigurationProperties(MybatisProperties.class)
 @MapperScan(basePackageClasses = {UserMapper.class})
 @EnableTransactionManagement
 public class MybatisConf {
     @Resource
     private Environment environment;
-    @Resource
-    private DataSource dataSource;
-
     @Bean
     public DataSource dataSource() throws Exception{
         Properties props = new Properties();
@@ -45,7 +41,7 @@ public class MybatisConf {
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
-        fb.setDataSource(dataSource);
+        fb.setDataSource(dataSource());
         fb.setTypeAliasesPackage(environment.getProperty("spring.mybatis.type-aliases-package"));
         fb.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources(environment.getProperty("spring.mybatis.mapper-locations")));
@@ -53,8 +49,8 @@ public class MybatisConf {
     }
 
     @Bean
-    public DataSourceTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource);
+    public DataSourceTransactionManager transactionManager()throws Exception  {
+        return new DataSourceTransactionManager(dataSource());
     }
 
 }

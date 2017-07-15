@@ -1,14 +1,14 @@
 module.exports = {
     home: {
         host: 'localhost',
-        port: 8010,
-        path: '',
+        port: 18888,
+        path: '/tb-cgi',
         test: 'vue2-home/api'
     },
     admin: {
         host: 'localhost',
         port: 8011,
-        path: '',
+        path: '/tb-cgi',
         test: 'vue2-admin/api'
     }
 };

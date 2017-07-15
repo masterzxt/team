@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserById(id);
     }
 
-    @Transactional("customTransactionManager")
+    @Transactional
     @Override
     public Integer addUser(User user) {
         User user1  = new User("1","1","1","11111","1","2017-07-14","1","1","1","2017-07-14");

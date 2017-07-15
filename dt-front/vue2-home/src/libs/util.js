@@ -7,7 +7,7 @@ util.title = function(title) {
     window.document.title = title;
 };
 util.ajax = axios.create({
-    baseURL: `/api/`,
+    baseURL: `/tb-cgi/`,
     timeout: 30000
 });
 
