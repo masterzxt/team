@@ -19,7 +19,7 @@ public class ZkConf {
     @Resource
     private Environment environment;
     @Resource
-    RetryPolicy retryPolicy;
+    private RetryPolicy retryPolicy;
 
     @Bean
     RetryPolicy retryPolicy(){
@@ -32,12 +32,14 @@ public class ZkConf {
 
     @Bean
     CuratorFramework curatorFramework(){
-      return  CuratorFrameworkFactory.builder()
+        CuratorFramework zkClient =   CuratorFrameworkFactory.builder()
                 .connectString(environment.getProperty("zookeeper.connectString"))
                 .sessionTimeoutMs(Integer.parseInt(environment.getProperty("zookeeper.sessionTimeoutMs")))
                 .connectionTimeoutMs(Integer.parseInt(environment.getProperty("zookeeper.connectionTimeoutMs")))
                 .retryPolicy(retryPolicy)
                 .build();
+        zkClient.start();
+        return zkClient;
     }
 
 }
