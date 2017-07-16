@@ -22,5 +22,6 @@ public class WebMvcConf extends WebMvcConfigurerAdapter {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**");
         registry.addMapping("/login");
+        registry.addMapping("/ajaxLogin");
     }
 }

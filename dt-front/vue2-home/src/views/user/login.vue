@@ -106,7 +106,7 @@
                     this.errmsg = '';
                     let that = this
 
-                    Util.ajax.post('/login',{
+                    Util.ajax.post('/ajaxLogin',{
                         username: that.user,
                         password: that.pwd
                     }).catch(function (res) {
@@ -116,9 +116,9 @@
                             console.log('Error', res.message)
                         } else {
                             console.log(res.data);
-                          /*  console.log(res.status);
+                            console.log(res.status);
                             console.log(res.headers);
-                            console.log(res.config);*/
+                            console.log(res.config);
                         }
                     }).then(function (res) {
                         console.log(res);

@@ -30,16 +30,22 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll() //匿名访问
+                .antMatchers("/**").permitAll() //匿名访问
+                .antMatchers("/ajaxLogin").permitAll()  //ajax访问
                 .antMatchers("/api/**").authenticated() //认证访问
                 .and()
                 .formLogin()
-                .loginPage("/login")                 //表单登录
+                .loginPage("/ajaxLogin")//登陆页面
+                .loginProcessingUrl("/login")//登陆处理路径
+                .usernameParameter("username")//登陆用户名参数
+                .passwordParameter("password")//登陆密码参数
                 .defaultSuccessUrl("/api/user/name") //登录成功访问
                 .permitAll()   //登陆页匿名访问
                 .and()
                 .logout()
                 .permitAll()   //退出登陆允许访问
+                .and()
+                .cors()
                 .and()
                 .csrf()
                 .disable(); //session不保存在服务器
