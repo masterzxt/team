@@ -16,11 +16,16 @@ public class UserDaoImpl implements UserDao{
     @Resource
     private UserMapper userMapper;
     @Override
-    public  User getUserById(Integer id){
-        return userMapper.getUserById(id);
+    public  User findById(Integer id){
+        return userMapper.findById(id);
     }
     @Override
     public  User findByUsername(String username){
         return userMapper.findByUsername(username);
+    }
+
+    @Override
+    public int insert(User user) {
+        return userMapper.insert(user);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
  * Created by tpx on 2017/7/10.
  */
 public interface UserDao {
-    User getUserById(Integer id);
+    User findById(Integer id);
     User findByUsername(String username);
+    int insert(User user);
 }

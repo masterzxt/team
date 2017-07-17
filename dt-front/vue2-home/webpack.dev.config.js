@@ -43,12 +43,12 @@ module.exports = merge(webpackBaseConfig, {
         compress: true,
         port: 8000,
         proxy: {
-            '/api': {
+            '/tb-cgi': {
                 // 接口代理
                 target: `http://${proxy_config.host}:${proxy_config.port + proxy_config.path}`,
                 changeOrigin: true,
                 secure: false,
-                pathRewrite: {'^/api': ''}
+                pathRewrite: {'^/tb-cgi': ''}
             }
         },
         historyApiFallback: true

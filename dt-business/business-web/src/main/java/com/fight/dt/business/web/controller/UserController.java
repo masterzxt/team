@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContext;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tpx on 2017/7/10.
@@ -32,16 +35,22 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation(value="用户信息", notes="根据User的id获取用户信息")
-    @ApiImplicitParam(name = "id", value = "用户的id", required = true, dataType = "Long")
-    @RequestMapping(value="/info", method= RequestMethod.GET)
-    public String info(Long id) {
-        return "success";
+    @RequestMapping(value="/info", method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PreAuthorize("isAuthenticated()")
+    public Map<String,Object> info() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        Map map = new HashMap<String,Object>();
+        map.put("username",userDetails.getUsername());
+        return map;
     }
 
     @RequestMapping("/getUserById")
+    @ApiImplicitParam(name = "id", value = "用户的id", required = true, dataType = "Long")
     @ResponseBody
     public String getUserById(Integer id){
-        User user = userService.getUserById(id);
+        User user = userService.findById(id);
         logger.info(user.getUsername());
         logger.info(user.getUsername());
         logger.info(user.getPassword());
@@ -57,4 +66,6 @@ public class UserController {
                 .getPrincipal();
         return userDetails.toString();
     }
+
+
 }
