@@ -18,10 +18,10 @@ public class WebMvcConf extends WebMvcConfigurerAdapter {
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**");
         registry.addMapping("/login");
-        registry.addMapping("/ajaxLogin");
     }
 }

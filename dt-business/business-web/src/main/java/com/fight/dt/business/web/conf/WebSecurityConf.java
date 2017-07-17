@@ -1,6 +1,8 @@
 package com.fight.dt.business.web.conf;
 
 import com.fight.dt.business.service.impl.DtUserDetailsService;
+import com.fight.dt.business.web.security.RestAuthenticationFailureHandler;
+import com.fight.dt.business.web.security.RestAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,20 +28,27 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Resource
     private DtUserDetailsService dtUserDetailsService;
+
+    @Resource
+    private RestAuthenticationFailureHandler restAuthenticationFailureHandler;
+
+    @Resource
+    private RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/**").permitAll() //匿名访问
-                .antMatchers("/ajaxLogin").permitAll()  //ajax访问
                 .antMatchers("/api/**").authenticated() //认证访问
                 .and()
                 .formLogin()
-                .loginPage("/ajaxLogin")//登陆页面
-                .loginProcessingUrl("/login")//登陆处理路径
+                .loginPage("/login")//登陆页面
                 .usernameParameter("username")//登陆用户名参数
                 .passwordParameter("password")//登陆密码参数
-                .defaultSuccessUrl("/api/user/name") //登录成功访问
+                //.defaultSuccessUrl("/api/user/name") //登录成功访问
+                .failureHandler(restAuthenticationFailureHandler)
+                .successHandler(restAuthenticationSuccessHandler)
                 .permitAll()   //登陆页匿名访问
                 .and()
                 .logout()
@@ -52,11 +61,12 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(dtUserDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());

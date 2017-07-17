@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
-	@Override
+    @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException exception) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write("{\"result\":\"error\"}");
-		response.getWriter().flush();
-	}
+                                        AuthenticationException exception) throws IOException, ServletException {
+        // TODO Auto-generated method stub
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"result\":\"error\"}");
+        response.getWriter().flush();
+    }
 
 }

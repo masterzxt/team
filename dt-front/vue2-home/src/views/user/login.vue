@@ -1,30 +1,34 @@
 <style scoped>
-    .-user-login{
+    .-user-login {
         max-width: 521px;
         margin: 0 auto;
         padding: 2rem 1.2rem 0;
     }
-    .head{
+
+    .head {
         width: 5rem;
         height: 5rem;
         background: #e5e5e5;
         border-radius: 50%;
         margin: 0 auto 2rem;
     }
-    .input{
+
+    .input {
         border-bottom: 1px solid #bbb;
         padding: 12px 12px 12px 40px;
         color: #555;
         position: relative;
         margin-top: .5rem;
     }
-    .input input{
+
+    .input input {
         border: none;
         display: block;
         width: 100%;
         color: #333;
     }
-    .input .icon{
+
+    .input .icon {
         position: absolute;
         left: 0;
         width: 40px;
@@ -35,10 +39,12 @@
         text-align: center;
         transition: color 1s;
     }
-    .input.focus .icon{
+
+    .input.focus .icon {
         color: #479CFF;
     }
-    .err-msg{
+
+    .err-msg {
         color: red;
         text-align: right;
         margin-top: .5rem;
@@ -47,24 +53,28 @@
         line-height: 1rem;
         overflow: hidden;
     }
-    .btn{
+
+    .btn {
         margin-top: 15px;
         opacity: .85;
     }
-    .btn:hover{
+
+    .btn:hover {
         opacity: 1;
     }
-    .btn.loading{
+
+    .btn.loading {
         opacity: .62;
     }
-    .link{
+
+    .link {
         margin-top: 1rem;
         font-size: .7rem;
     }
 </style>
 <template>
     <div class="-user-login">
-        <img class="head" />
+        <img class="head"/>
         <div class="input" :class="{ focus:current=='user' }">
             <i class="icon i-user"></i>
             <input class="user" v-model="user" type="text" placeholder="账号" @focus="focus">
@@ -88,6 +98,7 @@
 </template>
 <script>
     import Util from '../../libs/util';
+    import qs from 'qs';
     export default {
         data () {
             return {
@@ -104,10 +115,8 @@
                     this.loading = true;
                     this.errmsg = '';
                     let that = this;
-                    Util.ajax.post('/login',{
-                        username: that.user,
-                        password: that.pwd
-                    }).catch(function (res) {
+                    let data = qs.stringify({username: that.user, password: that.pwd});
+                    Util.ajax.post('/login',data).catch(function (res) {
                         that.loading = false;
                         if (res instanceof Error) {
                             that.errmsg = res.message;

@@ -8,30 +8,34 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by tpx on 2017/7/15.
  */
-public class ZkNodeListener implements NodeCacheListener,PathChildrenCacheListener{
+public class ZkNodeListener implements NodeCacheListener, PathChildrenCacheListener {
 
     private static final Logger log = LoggerFactory.getLogger(ZkNodeListener.class);
     private NodeCache nodeCache;
     private PathChildrenCache pathChildrenCache;
 
-    public ZkNodeListener(NodeCache nodeCache){
+    public ZkNodeListener(NodeCache nodeCache) {
         this.nodeCache = nodeCache;
     }
-    public ZkNodeListener(PathChildrenCache pathChildrenCache){
+
+    public ZkNodeListener(PathChildrenCache pathChildrenCache) {
         this.pathChildrenCache = pathChildrenCache;
     }
-    public ZkNodeListener(NodeCache nodeCache,PathChildrenCache pathChildrenCache){
+
+    public ZkNodeListener(NodeCache nodeCache, PathChildrenCache pathChildrenCache) {
         this.pathChildrenCache = pathChildrenCache;
         this.nodeCache = nodeCache;
     }
+
     @Override
-    public void nodeChanged(){
+    public void nodeChanged() {
         log.info("zkNodeChangedPath:" + nodeCache.getCurrentData().getPath());
         log.info("zkNodeChangedData:" + new String(nodeCache.getCurrentData().getData()));
         log.info("zkNodeChangedStat:" + nodeCache.getCurrentData().getStat());
     }
+
     @Override
-    public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception{
+    public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
         log.info("ZkChildEventType:" + event.getType().name());
         log.info("zkChildEventPath:" + event.getData().getPath());
         log.info("zkChildEventData:" + new String(event.getData().getData()));

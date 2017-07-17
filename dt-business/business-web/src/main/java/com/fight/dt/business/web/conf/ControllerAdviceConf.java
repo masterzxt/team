@@ -20,12 +20,12 @@ public class ControllerAdviceConf {
 
     @ExceptionHandler(Throwable.class)
     @ResponseBody()
-    Map<String,Object> handleControllerException(HttpServletRequest request, Throwable ex) {
+    Map<String, Object> handleControllerException(HttpServletRequest request, Throwable ex) {
         HttpStatus status = getStatus(request);
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("status",status);
-        map.put("message",ex.getMessage());
-        map.put("reasonPhrase",status.getReasonPhrase());
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("status", status);
+        map.put("message", ex.getMessage());
+        map.put("reasonPhrase", status.getReasonPhrase());
         return map;
     }
 

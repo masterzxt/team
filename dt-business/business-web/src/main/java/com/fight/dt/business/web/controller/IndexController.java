@@ -36,45 +36,16 @@ public class IndexController {
     @Resource
     private UserService userService;
 
-    @ApiOperation(value="首页信息", notes="首页信息")
-    @RequestMapping(value="/", method= RequestMethod.GET)
+    @ApiOperation(value = "首页信息", notes = "首页信息")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         return "success";
     }
 
     @RequestMapping("/adduser")
     @ResponseBody
-    public String adduser(User user){
+    public String adduser(User user) {
         userService.insert(user);
         return "200";
-    }
-
-    @RequestMapping("/ajaxLogin")
-    public void loginPage(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
-        logger.info("=================");
-        logger.info("=================X-Requested-With="+httpServletRequest.getHeader("X-Requested-With"));
-        if (null != httpServletRequest.getHeader("X-Requested-With") && "XMLHttpRequest".equals(httpServletRequest.getHeader("X-Requested-With"))) {
-            httpServletRequest.getRequestDispatcher("/loginPageAjax").forward(httpServletRequest,httpServletResponse);
-        } else {
-            httpServletRequest.getRequestDispatcher("/loginPageAjax").forward(httpServletRequest,httpServletResponse);
-        }
-    }
-
-    @RequestMapping("/loginPageAjax")
-    public @ResponseBody String loginPageAjax() {
-
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        if(authentication.isAuthenticated() && !authentication.getPrincipal().toString().equals("anonymousUser")){
-            return  authentication.getPrincipal().toString();
-        }else{
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority("LOGIN");
-            Set<SimpleGrantedAuthority> set = new HashSet<SimpleGrantedAuthority>();
-            set.add(authority);
-            securityContext.setAuthentication(new UsernamePasswordAuthenticationToken("user","user",set));
-            securityContext.getAuthentication().setAuthenticated(true);
-            return "success!";
-        }
-
     }
 }
