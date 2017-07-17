@@ -2,14 +2,14 @@
     .-user-login{
         max-width: 521px;
         margin: 0 auto;
-        padding: 0 1.2rem;
+        padding: 2rem 1.2rem 0;
     }
     .head{
         width: 5rem;
         height: 5rem;
         background: #e5e5e5;
         border-radius: 50%;
-        margin: 2rem auto;
+        margin: 0 auto 2rem;
     }
     .input{
         border-bottom: 1px solid #bbb;
@@ -89,7 +89,6 @@
 <script>
     import Util from '../../libs/util';
     export default {
-        name: 'login-box',
         data () {
             return {
                 user: '',           //用户账号
@@ -97,23 +96,23 @@
                 errmsg: '',         //错误显示
                 loading: false,    //请求是否在提交中
                 current: ''
-            }
+            };
         },
         methods: {
             login: function () {
                 if (!this.loading) {
-                    this.loading = true
+                    this.loading = true;
                     this.errmsg = '';
-                    let that = this
+                    let that = this;
 
                     Util.ajax.post('/login',{
                         user: that.user,
                         pwd: that.pwd
                     }).catch(function (res) {
-                        that.loading = false
+                        that.loading = false;
                         if (res instanceof Error) {
-                            that.errmsg = res.message
-                            console.log('Error', res.message)
+                            that.errmsg = res.message;
+                            console.log(res.message);
                         } else {
                             console.log(res.data);
                             console.log(res.status);
@@ -121,15 +120,15 @@
                             console.log(res.config);
                         }
                     }).then(function (res) {
-                        console.log(res.data)
-                        that.loading = false
-                        that.errmsg = "密码错误"
+                        console.log(res.data);
+                        that.loading = false;
+                        that.errmsg = "密码错误";
                     });
                 }
             },
             focus: function (e) {
-                this.current = e.target.className
+                this.current = e.target.className;
             }
         }
-    }
+    };
 </script>

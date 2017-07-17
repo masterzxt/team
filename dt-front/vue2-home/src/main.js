@@ -21,11 +21,11 @@ router.beforeEach((to, from, next) => {
         next({
             path: '/user/login',
             query: {redirect: to.fullPath}
-        })
+        });
     } else {
         //iView.LoadingBar.start();
         Util.title(to.meta.title);
-        next()
+        next();
     }
 });
 

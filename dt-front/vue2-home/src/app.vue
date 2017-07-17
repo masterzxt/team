@@ -1,6 +1,6 @@
 <style>
     @import 'styles/common.css';
-    @import "http://at.alicdn.com/t/font_xpcpf52or1f9a4i.css";
+    @import "http://at.alicdn.com/t/font_yodjqhb8a6y9zfr.css";
 </style>
 <template>
     <div id="body">
@@ -10,7 +10,7 @@
 <script>
     export default {
         data () {
-            return {}
+            return {};
         },
         mounted () {
 
@@ -21,5 +21,5 @@
         methods: {
 
         }
-    }
+    };
 </script>

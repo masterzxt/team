@@ -72,8 +72,8 @@ img{
 }
 
 /*-- 默认Android -------------------------------------------*/
-html{font-size: 20px;background: #fff;}
-body{font-size: .8rem;min-width: 300px;color: #101010; }
+html{font-size: 20px;background: #fff;height: 100%}
+body{font-size: .8rem;min-width: 300px;color: #101010;height: 100%}
 @media only screen and (max-width:320px){
     html{font-size: 17.5px;}
 }
@@ -159,12 +159,42 @@ body{font-size: .8rem;min-width: 300px;color: #101010; }
     background-color: #479CFF;
     border-color: #479CFF;
     text-align: center;
-    padding: .65rem 0;
+    padding: .65rem;
     cursor: pointer;
     transition: opacity .6s,background .6s;
     opacity: .85;
 }
-
+.btn.ib{
+    display: inline-block;
+}
+.btn.br3{
+    border-radius: 3px;
+}
+.btn.br5{
+    border-radius: 5px;
+}
+.btn.br8{
+    border-radius: 8px;
+}
+.btn.s{
+    font-size: .6rem;
+    padding: .5rem;
+}
+.btn.m{
+    font-size: .7rem;
+    padding: .58rem;
+}
+.btn.l{
+    font-size: .8rem;
+}
+.btn.xl{
+    font-size: .9rem;
+    padding: .73rem;
+}
+.btn.xxl{
+    font-size: 1rem;
+    padding: .8rem;
+}
 #body{
     max-width: 844px;
     margin: 0 auto;
