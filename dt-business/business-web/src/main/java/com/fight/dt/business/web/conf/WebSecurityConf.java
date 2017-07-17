@@ -39,25 +39,25 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll() //匿名访问
-                .antMatchers("/api/**").authenticated() //认证访问
+                    .antMatchers("/**").permitAll() //匿名访问
+                    .antMatchers("/api/**").authenticated() //认证访问
                 .and()
-                .formLogin()
-                .loginPage("/login")//登陆页面
-                .usernameParameter("username")//登陆用户名参数
-                .passwordParameter("password")//登陆密码参数
+                    .formLogin()
+                    .loginPage("/login")//登陆页面
+                    .usernameParameter("username")//登陆用户名参数
+                    .passwordParameter("password")//登陆密码参数
                 //.defaultSuccessUrl("/api/user/name") //登录成功访问
-                .failureHandler(restAuthenticationFailureHandler)
-                .successHandler(restAuthenticationSuccessHandler)
-                .permitAll()   //登陆页匿名访问
+                    .failureHandler(restAuthenticationFailureHandler)
+                    .successHandler(restAuthenticationSuccessHandler)
+                    .permitAll()   //登陆页匿名访问
                 .and()
-                .logout()
-                .permitAll()   //退出登陆允许访问
+                    .logout()
+                    .permitAll()   //退出登陆允许访问
                 .and()
-                .cors()
+                    .cors()
                 .and()
-                .csrf()
-                .disable(); //session不保存在服务器
+                    .csrf()
+                    .disable(); //防注入
     }
 
     @Bean
