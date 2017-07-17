@@ -8,7 +8,10 @@ util.title = function(title) {
 };
 util.ajax = axios.create({
     baseURL: `/tb-cgi/`,
-    timeout: 30000
+    timeout: 30000,
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
 });
 
 util.cookie = function (name, value, daysOrOptions) {
