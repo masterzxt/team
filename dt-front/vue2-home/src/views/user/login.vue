@@ -132,6 +132,12 @@
                         console.log(res.data);
                         that.loading = false;
                         that.errmsg = "密码错误";
+                        //测试security问题
+                        Util.ajax.get("/api/user/name").catch(function (res) {
+
+                        }).then(function () {
+                            console.log(res.data);
+                        });
                     });
                 }
             },
