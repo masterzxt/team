@@ -40,6 +40,12 @@ public class Application extends SpringBootServletInitializer {
         String path = "/zkClient/nodeCache";
         //获取链接
         CuratorFramework zkClient = (CuratorFramework)ctx.getBean(CuratorFramework.class);
+        try{
+            zkClient.delete().forPath(path);
+        }catch(Exception e){
+
+        }
+
         //创建节点并且初始化节点内容数据
         zkClient.create()
                 .creatingParentContainersIfNeeded()
@@ -59,6 +65,7 @@ public class Application extends SpringBootServletInitializer {
         nodeCache.getListenable().addListener(zkNodeListener);
         //改变信息
         zkClient.setData().forPath(path,"test".getBytes());
+
 
     }
 }
