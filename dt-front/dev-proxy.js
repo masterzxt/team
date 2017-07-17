@@ -1,5 +1,6 @@
 const config = require('./dev.proxy.config');
 const express = require('express');
+var bodyParser = require("body-parser");
 const path = require('path');
 const proxy = require('http-proxy-middleware');//引入代理中间件
 
@@ -10,11 +11,13 @@ names.forEach(function (name) {
 
 function run(name) {
     var app = express();
+    app.use(bodyParser.urlencoded({ extended: false }));
     var _config = config[name];
     app.use(function (req, res, next) {
         try{
-            //console.log(`./${_config.test}/${req.method.toLowerCase() + req.originalUrl}`);
+            console.log(`./${_config.test}/${req.method.toLowerCase() + req.originalUrl}`);
             var api = require(`./${_config.test}/${req.method.toLowerCase() + req.originalUrl}`);
+            console.log(req.body);
             res.end(JSON.stringify(api));
         }catch (e){
             next();

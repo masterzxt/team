@@ -104,7 +104,6 @@
                     this.loading = true;
                     this.errmsg = '';
                     let that = this;
-
                     Util.ajax.post('/login',{
                         username: that.user,
                         password: that.pwd
@@ -112,7 +111,7 @@
                         that.loading = false;
                         if (res instanceof Error) {
                             that.errmsg = res.message;
-                            console.log('Error', res.message);
+                            console.log(res.message);
                         } else {
                             console.log(res.data);
                             /*console.log(res.status);
