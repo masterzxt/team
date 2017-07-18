@@ -5,16 +5,16 @@
 1. business-web 对外开放的服务         (控制层，服务层)
 
 # 项目运行
-* maven 生成对应的jar 和 war 包 
+* maven 生成对应的 war 包 
 ```$xslt
- maven clean install
+mvn clean package -Dmaven.test.skip=true -P dev
 ```
 * business-web 运行 Application.main [ps:vm options 加上： -Dspring.profiles.active=dev]
 ![示例图](http://7xo6kd.com1.z0.glb.clouddn.com/upload-ueditor-image-20170711-1499756378710052966.png)
 ```$xslt
-http://localhost:18888
+http://localhost:18888/bt-cgi/
 ```
 * swagger API
 ```$xslt
-http://localhost:18888/swagger-ui.html
+http://localhost:18888/bt-cgi/swagger-ui.html
 ```
