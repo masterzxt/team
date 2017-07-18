@@ -109,6 +109,9 @@
                     <exclude>application-dev.properties</exclude>
                     <exclude>application-test.properties</exclude>
                     <exclude>application-prod.properties</exclude>
+                    <exclude>logback-dev.xml</exclude>
+                    <exclude>logback-test.xml</exclude>
+                    <exclude>logback-prod.xml</exclude>
                 </excludes>
             </resource>
 
@@ -117,6 +120,7 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>application-${profileAcitve}.properties</include>
+                    <include>logback-${profileAcitve}.xml</include>
                 </includes>
             </resource>
         </resources>
