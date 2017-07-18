@@ -7,7 +7,7 @@
 # 项目运行
 * maven 生成对应的 war 包 
 ```$xslt
-mvn clean package -Dmaven.test.skip=true -P dev
+mvn clean install -Dmaven.test.skip=true -P dev
 ```
 * business-web 运行 Application.main [ps:vm options 加上： -Dspring.profiles.active=dev]
 ![示例图](http://7xo6kd.com1.z0.glb.clouddn.com/upload-ueditor-image-20170711-1499756378710052966.png)
