@@ -1,8 +1,7 @@
 <style scoped>
     .-user-login {
-        max-width: 521px;
         margin: 0 auto;
-        padding: 2rem 1.2rem 0;
+        padding-top: 2rem;
     }
 
     .head {
@@ -15,7 +14,7 @@
 
     .input {
         border-bottom: 1px solid #bbb;
-        padding: 12px 12px 12px 40px;
+        padding: .6rem .6rem .6rem 2rem;
         color: #555;
         position: relative;
         margin-top: .5rem;
@@ -31,9 +30,9 @@
     .input .icon {
         position: absolute;
         left: 0;
-        width: 40px;
-        height: 48px;
-        line-height: 48px;
+        width: 2rem;
+        height: 2.4rem;
+        line-height: 2.4rem;
         top: 0;
         font-size: 1rem;
         text-align: center;
@@ -59,21 +58,13 @@
         opacity: .85;
     }
 
-    .btn:hover {
-        opacity: 1;
-    }
-
-    .btn.loading {
-        opacity: .62;
-    }
-
     .link {
         margin-top: 1rem;
         font-size: .7rem;
     }
 </style>
 <template>
-    <div class="-user-login">
+    <div class="-user-login main-pad main-mw">
         <img class="head"/>
         <div class="input" :class="{ focus:current=='user' }">
             <i class="icon i-user"></i>
@@ -84,62 +75,55 @@
             <input class="pwd" v-model="pwd" type="password" placeholder="密码" @focus="focus">
         </div>
         <div class="err-msg">{{ errmsg }}</div>
-        <div class="btn" @click="login" :class="{ loading:loading }">
-            <template v-if="loading">
-                请稍等...
-            </template>
-            <template v-else>
-                登录
-            </template>
-        </div>
+        <btn :state="state" block="true" size="l" @click="login">登录</btn>
         <router-link class="fl link" to="/user/reg">用户注册</router-link>
         <router-link class="fr link" to="/user/repwd">忘记密码</router-link>
     </div>
 </template>
 <script>
     import Util from '../../libs/util';
-    import qs from 'qs';
+    import Btn from '../../components/Btn';
+
     export default {
+        components: {
+            'btn': Btn
+        },
         data () {
             return {
-                user: '',           //用户账号
-                pwd: '',            //用户密码
+                user: '',           //form 用户账号
+                pwd: '',            //form 用户密码
                 errmsg: '',         //错误显示
-                loading: false,    //请求是否在提交中
+                state: false,    //请求是否在提交中
                 current: ''
             };
         },
         methods: {
             login: function () {
-                if (!this.loading) {
-                    this.loading = true;
-                    this.errmsg = '';
-                    let that = this;
-                    let data = qs.stringify({username: that.user, password: that.pwd});
-                    Util.ajax.post('/login',data).catch(function (res) {
-                        that.loading = false;
-                        if (res instanceof Error) {
-                            that.errmsg = res.message;
-                            console.log(res.message);
-                        } else {
-                            console.log(res.data);
-                            /*console.log(res.status);
-                             console.log(res.headers);
-                             console.log(res.config);*/
-                        }
-                    }).then(function (res) {
-                        console.log(res);
-                        console.log(res.data);
-                        that.loading = false;
+                this.state = '请稍等...';
+                this.errmsg = '';
+                let that = this;
+                //登录接口
+                Util.post('/login',{
+                    username: that.user,
+                    password: that.pwd
+                }).catch(function (res) {
+                    if (res instanceof Error) {
+                        that.errmsg = res.message;
+                    } else {
+                        that.errmsg = "未知错误"
+                    }
+                }).then(function (res) {
+                    that.state = false;
+                    if(res){
                         that.errmsg = "密码错误";
                         //测试security问题
-                        Util.ajax.get("/api/user/name").catch(function (res) {
+                        Util.get("/api/user/name").catch(function (res) {
 
-                        }).then(function () {
-                            console.log(res.data);
+                        }).then(function (_res) {
+                            console.log(_res.data);
                         });
-                    });
-                }
+                    }
+                });
             },
             focus: function (e) {
                 this.current = e.target.className;

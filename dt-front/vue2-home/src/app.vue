@@ -1,9 +1,9 @@
 <style>
     @import 'styles/common.css';
-    @import "http://at.alicdn.com/t/font_yodjqhb8a6y9zfr.css";
+    @import "http://at.alicdn.com/t/font_50sulvva5exc4n29.css";
 </style>
 <template>
-    <div id="body">
+    <div class="mw" id="body">
         <router-view></router-view>
     </div>
 </template>

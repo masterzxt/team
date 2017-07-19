@@ -3,11 +3,8 @@ import VueRouter from 'vue-router';
 import Routers from './router';
 import Util from './libs/util';
 import App from './app.vue';
-/*import iView from 'iview';
-import 'iview/dist/styles/iview.css';*/
 
 Vue.use(VueRouter);
-//Vue.use(iView);
 
 // 路由配置
 const RouterConfig = {
@@ -17,6 +14,7 @@ const RouterConfig = {
 const router = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
+    console.log(to);
     if (to.meta.checkLogin && !Util.cookie('uid')) {
         next({
             path: '/user/login',

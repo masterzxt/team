@@ -20,15 +20,22 @@
         <align offset_y="-2rem">
             <i class="icon i-404"></i>
             <p>您访问的页面不存在</p>
-            <div class="btn ib br3 m" onclick="history.go(-1)">返回上一页</div>
+            <btn @click="back">返回上一页</btn>
         </align>
     </div>
 </template>
 <script>
     import Align from '../components/Align';
+    import Btn from '../components/Btn';
     export default {
         components: {
-            'align': Align
+            'align': Align,
+            'btn': Btn
+        },
+        methods: {
+            back: function () {
+                history.go(-1)
+            }
         }
     };
 </script>
