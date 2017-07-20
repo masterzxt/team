@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
@@ -25,16 +26,25 @@ public class IndexController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private RestTemplate restTemplate;
+
     @ApiOperation(value = "首页信息", notes = "首页信息")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         return "success";
     }
 
-    @RequestMapping("/adduser")
+    @RequestMapping(path="/adduser",method = RequestMethod.POST)
     @ResponseBody
     public String adduser(User user) {
         userService.insert(user);
         return "200";
+    }
+
+    @RequestMapping(path="/rest",method = RequestMethod.GET)
+    @ResponseBody
+    public String restTemplate(User user) {
+        return restTemplate.getForEntity("https://www.baidu.com",String.class).getBody();
     }
 }

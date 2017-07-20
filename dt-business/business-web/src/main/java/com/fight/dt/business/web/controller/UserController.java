@@ -46,7 +46,7 @@ public class UserController {
         return map;
     }
 
-    @RequestMapping("/getUserById")
+    @RequestMapping(path="/getUserById",method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiImplicitParam(name = "id", value = "用户的id", required = true, dataType = "Long")
     @ResponseBody
     public String getUserById(Integer id){
@@ -57,7 +57,7 @@ public class UserController {
         return "success!";
     }
 
-    @RequestMapping("/name")
+    @RequestMapping(path="/name",method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @PreAuthorize("isAuthenticated()")
     public String name(){
