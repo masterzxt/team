@@ -109,6 +109,7 @@
                             if (t > 0) {
                                 that.stateSendVerify = t-- + ' 秒后可重新发送';
                             }else{
+                                that.stateSendVerify = false;
                                 clearInterval(timer);
                             }
                         }, 1000);
