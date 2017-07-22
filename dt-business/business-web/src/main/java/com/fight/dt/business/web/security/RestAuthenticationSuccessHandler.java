@@ -15,11 +15,7 @@ public class RestAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	@Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write("{\"result\":\"ok\"}");
-		response.getWriter().flush();
-		
+		request.getRequestDispatcher("/api/user/info").forward(request,response);
 	}
 
 }

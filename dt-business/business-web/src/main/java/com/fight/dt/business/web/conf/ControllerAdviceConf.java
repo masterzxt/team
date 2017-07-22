@@ -4,6 +4,7 @@ import com.fight.dt.business.common.core.MsgEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +24,6 @@ public class ControllerAdviceConf {
     Map<String, Object> exception(HttpServletRequest request, Exception ex) {
         HttpStatus status = getStatus(request);
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("status", status.value());
         map.put("msg", ex.getMessage());
         map.put("code", MsgEnum.Fail.getCode());
         return map;
@@ -33,9 +33,8 @@ public class ControllerAdviceConf {
     @ResponseBody()
     Map<String, Object> authenticationException(HttpServletRequest request, AuthenticationException ex) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("status", 401);
-        map.put("code", MsgEnum.Fail.getCode());
-        map.put("msg", ex.getMessage());
+        map.put("code", MsgEnum.NOT_LOGIN_ERROR.getCode());
+        map.put("msg", MsgEnum.NOT_LOGIN_ERROR.getMsg());
         return map;
     }
 
@@ -43,9 +42,17 @@ public class ControllerAdviceConf {
     @ResponseBody()
     Map<String, Object> authenticationException(HttpServletRequest request, AccessDeniedException ex) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("status", 403);
-        map.put("msg", ex.getMessage());
-        map.put("code", MsgEnum.Fail.getCode());
+        map.put("msg", MsgEnum.NOT_ACCESS_ERROR.getMsg());
+        map.put("code", MsgEnum.NOT_ACCESS_ERROR.getCode());
+        return map;
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    @ResponseBody()
+    Map<String, Object> usernameNotFoundException(HttpServletRequest request, UsernameNotFoundException ex) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("msg", MsgEnum.USERNAME_NOT_FOUND_ERROR.getMsg());
+        map.put("code", MsgEnum.USERNAME_NOT_FOUND_ERROR.getCode());
         return map;
     }
 

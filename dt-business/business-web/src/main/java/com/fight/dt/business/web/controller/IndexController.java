@@ -41,13 +41,22 @@ public class IndexController implements ErrorController {
     private PasswordEncoder passwordEncoder;
 
     @ApiOperation(value = "错误页", notes = "错误页")
-    @RequestMapping(value = ERROR_PATH, method = RequestMethod.GET)
+    @RequestMapping(value = ERROR_PATH, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public Map error() {
         Map map = new HashMap<String, Object>();
-        map.put("code", MsgEnum.Fail.getCode());
-        map.put("msg", MsgEnum.Fail.getMsg());
-        map.put("status", "404");
+        map.put("code", MsgEnum.NOT_FOUND_ERROR.getCode());
+        map.put("msg", MsgEnum.NOT_FOUND_ERROR.getMsg());
+        return map;
+    }
+
+    @ApiOperation(value = "错误页", notes = "错误页")
+    @RequestMapping(value = "/loginFail", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public Map loginFail() {
+        Map map = new HashMap<String, Object>();
+        map.put("code", MsgEnum.USERNAME_NOT_FOUND_ERROR.getCode());
+        map.put("msg", MsgEnum.USERNAME_NOT_FOUND_ERROR.getMsg());
         return map;
     }
 

@@ -39,7 +39,7 @@ public class UserController {
     private DtSpringSecurityService dtSpringSecurityService;
 
     @ApiOperation(value = "获取用户信息", notes = "用户信息")
-    @RequestMapping(value = "/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/info", method = {RequestMethod.GET, RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @PreAuthorize("isAuthenticated()")
     public Map<String, Object> info() {
         Map map = new HashMap<String, Object>();
