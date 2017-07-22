@@ -17,9 +17,11 @@ public class DtSpringSecurityService {
     @Resource
     private UserDao userDao;
 
-    public User getUser(){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext();
+    public User getUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
         String username = userDetails.getUsername();
-        return  userDao.findByUsername(username);
+        return userDao.findByUsername(username);
     }
 }
