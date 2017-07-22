@@ -115,13 +115,7 @@
                 }).then(function (res) {
                     that.state = false;
                     if(res){
-                        that.errmsg = "密码错误";
-                        //测试security问题
-                        Util.get("/api/user/name").catch(function (res) {
-
-                        }).then(function (_res) {
-                            console.log(_res.data);
-                        });
+                        that.errmsg = res.msg;
                     }
                 });
             },
