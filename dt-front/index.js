@@ -14,14 +14,14 @@ function run(name) {
 
     app.use('/dist', express.static(path.join(__dirname, _config.dist)));
 
-    const apiProxy = proxy('/tb-cgi', {
+    const apiProxy = proxy('/bt-cgi', {
         target: _config.api_root,
         changeOrigin: true,
         secure: false,
-        pathRewrite: {'^/tb-cgi': ''}
+        pathRewrite: {'^/bt-cgi': ''}
     });
 
-    app.use('/tb-cgi/', apiProxy);
+    app.use('/bt-cgi/', apiProxy);
 
     app.use('/', function (req, res) {
         res.sendFile(path.join(__dirname, _config.index));
