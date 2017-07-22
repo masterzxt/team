@@ -113,6 +113,7 @@
                         that.errmsg = "未知错误"
                     }
                 }).then(function (res) {
+                    console.log(res);
                     that.state = false;
                     if(res){
                         that.errmsg = res.msg;
