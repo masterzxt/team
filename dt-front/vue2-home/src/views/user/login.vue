@@ -115,8 +115,12 @@
                 }).then(function (res) {
                     console.log(res);
                     that.state = false;
-                    if(res){
-                        that.errmsg = res.msg;
+                    if(res.data.code == 0){
+                        //成功  跳转
+                        that.errmsg = res.data.msg;
+                    }else{
+                        //失败
+                        that.errmsg = res.data.msg;
                     }
                 });
             },
