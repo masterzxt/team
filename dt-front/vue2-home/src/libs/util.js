@@ -10,7 +10,7 @@ util.title = function(title) {
 };
 
 let ajax = axios.create({
-    baseURL: `/tb-cgi/`,
+    baseURL: `/bt-cgi/`,
     timeout: 30000,
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
