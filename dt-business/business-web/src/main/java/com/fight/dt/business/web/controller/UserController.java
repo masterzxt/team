@@ -2,6 +2,7 @@ package com.fight.dt.business.web.controller;
 
 import com.fight.dt.business.common.beans.User;
 import com.fight.dt.business.service.UserService;
+import com.fight.dt.business.service.impl.DtSpringSecurityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,39 +35,19 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Resource
     private UserService userService;
+    @Resource
+    private DtSpringSecurityService dtSpringSecurityService;
 
-    @ApiOperation(value="用户信息", notes="根据User的id获取用户信息")
-    @RequestMapping(value="/info", method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "获取用户信息", notes = "用户信息")
+    @RequestMapping(value = "/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @PreAuthorize("isAuthenticated()")
-    public Map<String,Object> info() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
-        Map map = new HashMap<String,Object>();
-        map.put("username",userDetails.getUsername());
+    public Map<String, Object> info() {
+        Map map = new HashMap<String, Object>();
+        User user = dtSpringSecurityService.getUser();
+        if (null != user) {
+            map.put("username", user.getUsername());
+            map.put("createTime", user.getCreateTime());
+        }
         return map;
     }
-
-    @RequestMapping(path="/getUserById",method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiImplicitParam(name = "id", value = "用户的id", required = true, dataType = "Long")
-    @ResponseBody
-    public String getUserById(Integer id){
-        User user = userService.findById(id);
-        logger.info(user.getUsername());
-        logger.info(user.getUsername());
-        logger.info(user.getPassword());
-        return "success!";
-    }
-
-    @RequestMapping(path="/name",method= RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    @PreAuthorize("isAuthenticated()")
-    public String name(){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
-        return userDetails.toString();
-    }
-
-
 }

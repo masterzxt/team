@@ -8,4 +8,5 @@ import com.fight.dt.business.common.beans.User;
 public interface UserService {
     User findById(Integer id);
     int insert(User user);
+    User findByUsername(String username);
 }

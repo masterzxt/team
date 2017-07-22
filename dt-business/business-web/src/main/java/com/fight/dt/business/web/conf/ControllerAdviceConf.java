@@ -1,5 +1,6 @@
 package com.fight.dt.business.web.conf;
 
+import com.fight.dt.business.common.core.MsgEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -23,7 +24,8 @@ public class ControllerAdviceConf {
         HttpStatus status = getStatus(request);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("status", status.value());
-        map.put("message", ex.getMessage());
+        map.put("msg", ex.getMessage());
+        map.put("code", MsgEnum.Fail.getCode());
         return map;
     }
 
@@ -32,7 +34,8 @@ public class ControllerAdviceConf {
     Map<String, Object> authenticationException(HttpServletRequest request, AuthenticationException ex) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("status", 401);
-        map.put("message", ex.getMessage());
+        map.put("code", MsgEnum.Fail.getCode());
+        map.put("msg", ex.getMessage());
         return map;
     }
 
@@ -41,7 +44,8 @@ public class ControllerAdviceConf {
     Map<String, Object> authenticationException(HttpServletRequest request, AccessDeniedException ex) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("status", 403);
-        map.put("message", ex.getMessage());
+        map.put("msg", ex.getMessage());
+        map.put("code", MsgEnum.Fail.getCode());
         return map;
     }
 
