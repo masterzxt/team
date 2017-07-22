@@ -1,6 +1,7 @@
 package com.fight.dt.business.web.controller;
 
 import com.fight.dt.business.common.beans.User;
+import com.fight.dt.business.common.core.MsgEnum;
 import com.fight.dt.business.service.UserService;
 import com.fight.dt.business.service.impl.DtSpringSecurityService;
 import io.swagger.annotations.Api;
@@ -45,8 +46,11 @@ public class UserController {
         Map map = new HashMap<String, Object>();
         User user = dtSpringSecurityService.getUser();
         if (null != user) {
+            map.put("id", user.getId());
             map.put("username", user.getUsername());
             map.put("createTime", user.getCreateTime());
+            map.put("code", MsgEnum.SUCCESS.getCode());
+            map.put("msg", MsgEnum.SUCCESS.getMsg());
         }
         return map;
     }
