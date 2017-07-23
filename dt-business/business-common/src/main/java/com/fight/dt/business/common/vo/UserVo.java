@@ -1,6 +1,7 @@
 package com.fight.dt.business.common.vo;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 
 /**
@@ -10,9 +11,12 @@ import io.swagger.annotations.ApiParam;
 public class UserVo {
 
     @ApiParam(name = "用户名",required = true)
+    @ApiModelProperty(value = "用户名",required = true)
     private String username;
     @ApiParam(name = "用户密码",required = true)
+    @ApiModelProperty(value = "用户密码",required = true)
     private String password;
+    @ApiModelProperty(value = "用户再次输入密码",required = true)
     @ApiParam(name = "用户再次输入密码",required = true)
     private String password2;
 
