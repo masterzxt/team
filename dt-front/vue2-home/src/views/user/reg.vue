@@ -44,24 +44,24 @@
         <header-bar></header-bar>
         <div class="form main-pad main-mw">
             <div class="input">
-                <input type="text" v-model="mobile" placeholder="请输入手机号码">
+                <input type="text" v-model="username" placeholder="请输入用户名">
             </div>
             <div class="input">
-                <input type="password" v-model="pwd" placeholder="请输入登录密码">
+                <input type="password" v-model="password" placeholder="请输入登录密码">
             </div>
             <div class="input">
-                <input type="password" v-model="repwd" placeholder="请确认登录密码">
+                <input type="password" v-model="password2" placeholder="请确认登录密码">
             </div>
-            <div class="input verify">
+            <!--<div class="input verify">
                 <input type="text" v-model="verify" placeholder="请输入短信验证码">
                 <btn type="blank" :state="stateSendVerify" size="s" opaque @click="sendVerify">发送验证码</btn>
-            </div>
+            </div>-->
             <div class="row">
                 <check v-model="agree">我已同意</check>
                 <router-link to="/user/agreement">《免责协议》</router-link>
             </div>
             <div class="err-msg">{{ errmsg }}</div>
-            <btn block="true" :state="stateReg" :disable="!agree" @click="reg">下一步</btn>
+            <btn block="true" :state="stateReg" :disable="!agree" @click="reg">注册</btn>
         </div>
     </div>
 </template>
@@ -79,52 +79,23 @@
         },
         data: function () {
             return {
-                mobile: '',      //form 手机号
-                pwd: '',         //form 密码
-                repwd: '',       //form 确认密码
-                verify: '',      //form 验证码
+                username: '',      //form 用户名
+                password: '',         //form 密码
+                password2: '',       //form 确认密码
                 agree: false,   //同意条款
                 errmsg: '',  //错误显示
-                stateSendVerify: false,    //按钮状态
                 stateReg: false    //按钮状态
             };
         },
         methods: {
-            sendVerify: function () {
-                this.stateSendVerify = '短信发送中...';
-                this.errmsg = '';
-                let that = this;
-                Util.post('reg', {
-                    mobile: this.mobile,
-                    pwd: this.pwd,
-                    repwd: this.repwd,
-                    verify: this.verify
-                }).catch(function () {
-                    that.stateSendVerify = false;
-                    Util.msg('短信发送失败');
-                }).then(function (res) {
-                    if(res || true){
-                        let t = 60;
-                        let timer = setInterval(function () {
-                            if (t > 0) {
-                                that.stateSendVerify = t-- + ' 秒后可重新发送';
-                            }else{
-                                that.stateSendVerify = false;
-                                clearInterval(timer);
-                            }
-                        }, 1000);
-                    }
-                })
-            },
             reg: function () {
                 this.stateReg = '请稍等...';
                 this.errmsg = '';
                 let that = this;
                 Util.post('reg',{
-                    mobile: this.mobile,
-                    pwd: this.pwd,
-                    repwd: this.repwd,
-                    verify: this.verify
+                    username: this.username,
+                    password: this.password,
+                    password2: this.password
                 }).catch(function (res) {
                     that.stateReg = false;
                     if (res instanceof Error) {
@@ -132,7 +103,17 @@
                     } else {
                         that.errmsg = "未知错误"
                     }
-                })
+                }).then(function (res) {
+                    console.log(res);
+                    that.state = false;
+                    if(res.data.code == 0){
+                        //成功  跳转
+                        that.errmsg = res.data.msg;
+                    }else{
+                        //失败
+                        that.errmsg = res.data.msg;
+                    }
+                });
             }
         }
     };
