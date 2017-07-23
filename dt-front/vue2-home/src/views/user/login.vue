@@ -68,11 +68,11 @@
         <img class="head"/>
         <div class="input" :class="{ focus:current=='user' }">
             <i class="icon i-user"></i>
-            <input class="user" v-model="user" type="text" placeholder="账号" @focus="focus">
+            <input class="user" v-model="username" type="text" placeholder="账号" @focus="focus">
         </div>
         <div class="input" :class="{ focus:current=='pwd' }">
             <i class="icon i-pwd"></i>
-            <input class="pwd" v-model="pwd" type="password" placeholder="密码" @focus="focus">
+            <input class="pwd" v-model="password" type="password" placeholder="密码" @focus="focus">
         </div>
         <div class="err-msg">{{ errmsg }}</div>
         <btn :state="state" block="true" size="l" @click="login">登录</btn>
@@ -83,15 +83,16 @@
 <script>
     import Util from '../../libs/util';
     import Btn from '../../components/Btn';
+    import qs from 'qs';
 
     export default {
         components: {
             'btn': Btn
         },
-        data () {
+        data(){
             return {
-                user: '',           //form 用户账号
-                pwd: '',            //form 用户密码
+                username: '',           //form 用户账号
+                password: '',            //form 用户密码
                 errmsg: '',         //错误显示
                 state: false,    //请求是否在提交中
                 current: ''
@@ -103,9 +104,13 @@
                 this.errmsg = '';
                 let that = this;
                 //登录接口
-                Util.post('/login',{
-                    username: that.user,
-                    password: that.pwd
+                Util.post('/login',qs.stringify({
+                    username:this.username,
+                    password:this.password
+                }),{
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
                 }).catch(function (res) {
                     if (res instanceof Error) {
                         that.errmsg = res.message;

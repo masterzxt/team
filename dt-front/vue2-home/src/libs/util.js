@@ -4,23 +4,20 @@ import cookies from 'vue-cookie';
 import qs from 'qs';
 
 let util = {};
-util.title = function(title) {
+util.title = function (title) {
     //title = title ? title + ' - Home' : 'iView project';
     window.document.title = title;
 };
 
 let ajax = axios.create({
     baseURL: `/bt-cgi/`,
-    timeout: 30000,
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    }
+    timeout: 30000
 });
 
 util.get = ajax.get;
 
-util.post = function (path,data,opt) {
-    return ajax.post(path, qs.stringify(data), opt);
+util.post = function (path, data, opt) {
+    return ajax.post(path, data, opt);
 };
 
 util.cookie = function (name, value, daysOrOptions) {
@@ -35,7 +32,7 @@ util.cookie = function (name, value, daysOrOptions) {
     }
 };
 
-util.msg = function (s,ok,cancel) {
+util.msg = function (s, ok, cancel) {
     if (arguments.length > 1) {
         confirm(s) ? ok && ok() : cancel && cancel();
     } else {
