@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
-//import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.concurrent.CountDownLatch;
@@ -17,7 +16,6 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Created by tpx on 2017/7/10.
  */
-//@Profile("dev")
 @SpringBootApplication(scanBasePackages="com.fight.dt.business")
 public class Application extends SpringBootServletInitializer {
 

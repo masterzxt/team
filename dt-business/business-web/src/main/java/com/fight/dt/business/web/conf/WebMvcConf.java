@@ -18,11 +18,14 @@ public class WebMvcConf extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/talk").setViewName("talk");
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**");
         registry.addMapping("/login");
+        registry.addMapping("/talk");
+        registry.addMapping("/reg");
     }
 }
