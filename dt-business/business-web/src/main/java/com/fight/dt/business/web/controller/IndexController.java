@@ -12,10 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,18 +74,17 @@ public class IndexController implements ErrorController {
     @ResponseBody
     public Map register(@RequestBody UserVo userVo) {
         Map map = new HashMap<String, Object>();
-        if (null == userVo.getUsername()) {
+        if (StringUtils.isEmpty(userVo.getUsername())) {
             map.put("code", MsgEnum.Fail.getCode());
             map.put("msg", "请输入用户名");
             return map;
         }
 
-        if (null == userVo.getPassword() || null == userVo.getPassword2()) {
+        if (StringUtils.isEmpty(userVo.getPassword()) || StringUtils.isEmpty(userVo.getPassword2())) {
             map.put("code", MsgEnum.Fail.getCode());
             map.put("msg", "请输入密码");
             return map;
         }
-
         if (!userVo.getPassword().equals(userVo.getPassword2())) {
             map.put("code", MsgEnum.Fail.getCode());
             map.put("msg", "两次密码输入不一致");
@@ -96,6 +98,7 @@ public class IndexController implements ErrorController {
         }
         User user1 = new User();
         user1.setUsername(userVo.getUsername());
+        user1.setNickname(userVo.getUsername());
         user1.setPassword(passwordEncoder.encode(userVo.getPassword()));
         userService.insert(user1);
         map.put("code", MsgEnum.SUCCESS.getCode());
