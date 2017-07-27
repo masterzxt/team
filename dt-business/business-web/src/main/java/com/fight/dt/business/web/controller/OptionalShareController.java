@@ -1,6 +1,7 @@
 package com.fight.dt.business.web.controller;
 
 import com.fight.dt.business.common.beans.OptionalShare;
+import com.fight.dt.business.common.beans.User;
 import com.fight.dt.business.common.core.MsgEnum;
 import com.fight.dt.business.service.OptionalShareService;
 import com.fight.dt.business.service.impl.DtSpringSecurityService;
@@ -36,12 +37,13 @@ public class OptionalShareController {
     @RequestMapping("/save")
     @PreAuthorize("isAuthenticated()")
     public Map<String, Object> saveOptionalShare(String shareId) {
+        User user = dtSpringSecurityService.getUser();
         Map<String, Object> resultMap = new HashMap<>();
         OptionalShare optionalShare = new OptionalShare();
         optionalShare.setShareId(shareId);
-        optionalShare.setUserId(dtSpringSecurityService.getUser().getId());
+        optionalShare.setUserId(user.getId());
         optionalShare.setStatus("1");
-        optionalShare.setOperator(dtSpringSecurityService.getUser().getNickname());
+        optionalShare.setOperator(user.getNickname());
         optionalShareService.insert(optionalShare);
         resultMap.put("code", MsgEnum.SUCCESS.getCode());
         resultMap.put("msg", "save optional share success !");
