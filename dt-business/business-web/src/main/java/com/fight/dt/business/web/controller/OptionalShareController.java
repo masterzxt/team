@@ -3,15 +3,18 @@ package com.fight.dt.business.web.controller;
 import com.fight.dt.business.common.beans.OptionalShare;
 import com.fight.dt.business.common.core.MsgEnum;
 import com.fight.dt.business.service.OptionalShareService;
+import com.fight.dt.business.service.impl.DtSpringSecurityService;
 import io.swagger.annotations.Api;
 import org.apache.zookeeper.Op;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -25,17 +28,20 @@ import java.util.List;
 public class OptionalShareController {
     private static final Logger logger = LoggerFactory.getLogger(OptionalShareController.class);
 
-    @Autowired
+    @Resource
     private OptionalShareService optionalShareService;
+    @Resource
+    private DtSpringSecurityService dtSpringSecurityService;
 
     @RequestMapping("/save")
-    public Map<String, Object> saveOptionalShare(Integer userId, String username, String shareId) {
+    @PreAuthorize("isAuthenticated()")
+    public Map<String, Object> saveOptionalShare(String shareId) {
         Map<String, Object> resultMap = new HashMap<>();
         OptionalShare optionalShare = new OptionalShare();
         optionalShare.setShareId(shareId);
-        optionalShare.setUserId(userId);
+        optionalShare.setUserId(dtSpringSecurityService.getUser().getId());
         optionalShare.setStatus("1");
-        optionalShare.setOperator(username);
+        optionalShare.setOperator(dtSpringSecurityService.getUser().getNickname());
         optionalShareService.insert(optionalShare);
         resultMap.put("code", MsgEnum.SUCCESS.getCode());
         resultMap.put("msg", "save optional share success !");
@@ -43,9 +49,10 @@ public class OptionalShareController {
     }
 
     @RequestMapping("/lists")
-    public Map<String, Object> getOptionShareList(Integer userId) {
+    @PreAuthorize("isAuthenticated()")
+    public Map<String, Object> getOptionShareList() {
         Map<String, Object> resultMap = new HashMap<>();
-        List<OptionalShare> optionalShareList = optionalShareService.getByUserId(userId);
+        List<OptionalShare> optionalShareList = optionalShareService.getByUserId(dtSpringSecurityService.getUser().getId());
         for (OptionalShare optionalShare : optionalShareList) {
             optionalShareService.findShareDetail(optionalShare);
         }
