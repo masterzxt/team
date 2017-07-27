@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Hello WebSocket</title>
@@ -24,7 +25,7 @@
         //this line.
         function connect() {
             var userid = document.getElementById('name').value;
-            var socket = new SockJS("http://localhost:10020/bt-cgi/webSocket");
+            var socket = new SockJS("http://150.95.135.36:8080/bt-cgi/webSocket");
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function(frame) {
                 setConnected(true);
@@ -41,11 +42,11 @@
 
         function sendName() {
             var name = document.getElementById('name').value;
-            stompClient.send("/app/hello", {atytopic:"greetings"}, JSON.stringify({ 'name': name }));
+            stompClient.send("/app/webSocket", {atytopic:"greetings"}, JSON.stringify({ 'name': name }));
         }
 
         function connectAny() {
-            var socket = new SockJS("http://localhost:10020/bt-cgi/webSocket");
+            var socket = new SockJS("http://150.95.135.36:8080/bt-cgi/webSocket");
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function(frame) {
                 setConnected(true);

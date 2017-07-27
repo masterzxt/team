@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -144,18 +145,22 @@ public class IndexController implements ErrorController {
     @MessageMapping("/message")
     @SendToUser("/message")
     public String handleSubscribe() {
-        logger.info("this is the @SubscribeMapping('/marco')");
-        return "I am a msg from SubscribeMapping('/macro').";
+        logger.info("this is the @SubscribeMapping('/message')");
+        return "I am a msg from SubscribeMapping('/message').";
     }
 
     /**
      * 测试对指定用户发送消息方法
+     *
      * @return
      */
     @RequestMapping(path = "/send", method = RequestMethod.GET)
-    public String send() {
-        simpMessagingTemplate.convertAndSendToUser("1", "/message", new String("I am a msg from SubscribeMapping('/macro')."));
-        return new String("I am a msg from SubscribeMapping('/macro').");
+    public Map send(String fromUsername, String toUsername, String content) {
+        simpMessagingTemplate.convertAndSendToUser(toUsername, "/message", content);
+        Map map = new HashMap<String, Object>();
+        map.put("code", MsgEnum.SUCCESS.getCode());
+        map.put("msg", MsgEnum.SUCCESS.getMsg());
+        return map;
     }
 
     public String getErrorPath() {
