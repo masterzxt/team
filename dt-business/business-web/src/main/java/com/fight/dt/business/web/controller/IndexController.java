@@ -100,6 +100,7 @@ public class IndexController implements ErrorController {
         user1.setUsername(userVo.getUsername());
         user1.setNickname(userVo.getUsername());
         user1.setPassword(passwordEncoder.encode(userVo.getPassword()));
+        user1.setCreateTime(new Date());
         userService.insert(user1);
         map.put("code", MsgEnum.SUCCESS.getCode());
         map.put("msg", MsgEnum.SUCCESS.getMsg());
