@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fight.dt.business.dao.mapper.UserMapper">
+<mapper namespace="com.fight.dt.business.dao.mapper.ItemMapper">
 
     <resultMap type="com.fight.dt.business.common.beans.Item" id="itemMap">
         <id property="id" column="id" javaType="Integer" jdbcType="INTEGER"/>

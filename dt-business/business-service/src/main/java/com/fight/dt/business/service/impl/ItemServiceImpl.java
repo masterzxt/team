@@ -11,6 +11,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import java.util.Iterator;
 /**
  * Created by tpx on 2017/7/28.
  */
+@Service("itemService")
 public class ItemServiceImpl implements ItemService{
 
     private  final Logger logger = LoggerFactory.getLogger(this.getClass());
