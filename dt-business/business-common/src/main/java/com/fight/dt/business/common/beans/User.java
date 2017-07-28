@@ -1,11 +1,12 @@
 package com.fight.dt.business.common.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by tpx on 2017/7/11.
  */
-public class User {
+public class User implements Serializable {
 
     private Integer id;
     private String username;

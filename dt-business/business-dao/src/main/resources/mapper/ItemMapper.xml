@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fight.dt.business.dao.mapper.UserMapper">
+
+    <resultMap type="com.fight.dt.business.common.beans.Item" id="itemMap">
+        <id property="id" column="id" javaType="Integer" jdbcType="INTEGER"/>
+        <result property="itemId" column="item_id" javaType="String" jdbcType="VARCHAR"/>
+        <result property="sellerId" column="seller_id" javaType="String" jdbcType="VARCHAR"/>
+        <result property="minPrice" column="min_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        <result property="maxPrice" column="max_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        <result property="createTime" column="create_time" javaType="java.sql.Date" jdbcType="DATE"/>
+        <result property="updateTime" column="update_time" javaType="java.sql.Date" jdbcType="DATE"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.fight.dt.business.common.beans.Item">
+        INSERT INTO user (id, item_id, seller_id, min_price, max_price,create_time,update_time) values (
+        #{id},#{itemId},#{sellerId},#{minPrice},#{maxPrice},#{createTime},#{updateTime})
+    </insert>
+
+    <select id="findById" parameterType="Integer" resultMap="itemMap">
+        SELECT *
+        FROM item
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <select id="findByItem" parameterType="com.fight.dt.business.common.beans.Item" resultMap="itemMap">
+        SELECT *
+        FROM item item
+        WHERE 1=1
+        <if test="itemId!=null">  and `item_id`=#{itemId}</if>
+        <if test="sellerId!=null">  and `seller_id`=#{sellerId}</if>
+        limit 0,1
+    </select>
+
+</mapper>

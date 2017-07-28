@@ -62,7 +62,6 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
             <version>1.5.4.RELEASE</version>
         </dependency>
-
         <!-- 开发工具 自动重启== -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

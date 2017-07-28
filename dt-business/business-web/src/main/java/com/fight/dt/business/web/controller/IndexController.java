@@ -1,15 +1,19 @@
 package com.fight.dt.business.web.controller;
 
+import com.fight.dt.business.common.beans.Item;
 import com.fight.dt.business.common.beans.User;
 import com.fight.dt.business.common.core.MsgEnum;
 import com.fight.dt.business.common.vo.UserVo;
+import com.fight.dt.business.service.ItemService;
 import com.fight.dt.business.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorController;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -24,8 +28,10 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -39,6 +45,9 @@ public class IndexController implements ErrorController {
     private static final String ERROR_PATH = "/error";
     @Resource
     private UserService userService;
+
+    @Resource
+    private ItemService itemService;
 
     @Resource
     private RestTemplate restTemplate;
@@ -165,5 +174,11 @@ public class IndexController implements ErrorController {
 
     public String getErrorPath() {
         return ERROR_PATH;
+    }
+
+    @RequestMapping(value = "/taobao", method = RequestMethod.GET)
+    @ResponseBody
+    public Item taobao(String itemId, String sellerId) {
+       return itemService.taobao(itemId, sellerId);
     }
 }

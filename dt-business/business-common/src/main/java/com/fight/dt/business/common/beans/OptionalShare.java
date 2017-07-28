@@ -2,12 +2,13 @@ package com.fight.dt.business.common.beans;
 
 import org.springframework.data.annotation.Transient;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by zhangwei on 17/7/27.
  */
-public class OptionalShare {
+public class OptionalShare implements Serializable {
     private Integer id;
     private String shareId;
     private Integer userId;
