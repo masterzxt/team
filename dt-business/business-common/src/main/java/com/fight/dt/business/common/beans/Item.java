@@ -15,7 +15,13 @@ public class Item implements Serializable {
     private BigDecimal maxPrice;
     private Date createTime;
     private Date updateTime;
-
+    private Integer taskStatus;
+    public Integer getTaskStatus() {
+        return taskStatus;
+    }
+    public void setTaskStatus(Integer taskStatus) {
+        this.taskStatus = taskStatus;
+    }
     public Integer getId() {
         return id;
     }

@@ -2,14 +2,15 @@ package com.fight.dt.business.web.controller;
 
 import com.fight.dt.business.common.beans.Item;
 import com.fight.dt.business.common.beans.User;
+import com.fight.dt.business.common.core.ItemTaskStatusEnum;
 import com.fight.dt.business.common.core.MsgEnum;
 import com.fight.dt.business.common.vo.UserVo;
+import com.fight.dt.business.service.ExcelService;
 import com.fight.dt.business.service.ItemService;
 import com.fight.dt.business.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorController;
@@ -18,7 +19,6 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,11 +28,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * Created by tpx on 2017/7/12.
@@ -57,6 +55,9 @@ public class IndexController implements ErrorController {
 
     @Resource
     private SimpMessagingTemplate simpMessagingTemplate;
+
+    @Resource
+    private ExcelService excelService;
 
     @ApiOperation(value = "错误页", notes = "错误页")
     @RequestMapping(value = ERROR_PATH, method = {RequestMethod.GET, RequestMethod.POST})
@@ -176,9 +177,69 @@ public class IndexController implements ErrorController {
         return ERROR_PATH;
     }
 
-    @RequestMapping(value = "/taobao", method = RequestMethod.GET)
-    @ResponseBody
-    public Item taobao(String itemId, String sellerId) {
-       return itemService.taobao(itemId, sellerId);
+    @RequestMapping(value = "/readExcel", method = RequestMethod.POST)
+    public Map readExcel(HttpServletRequest request) {
+        Map map = new HashMap<String, Object>();
+        try {
+            InputStream inputStream = request.getPart("fileUpload").getInputStream();
+            List<List<Object>> list = excelService.readExcel(inputStream);
+            for (int i = 0; i < list.size(); i++) {
+                List<Object> lists = list.get(i);
+                Item item = new Item();
+                if (lists.size() == 0) {
+                    continue;
+                } else if (lists.size() > 0) {
+                    Object itemId = lists.get(0);
+                    if (!StringUtils.isEmpty(itemId)) {
+                        item.setItemId(itemId.toString());
+                    } else {
+                        continue;
+                    }
+                    if (lists.size() > 1) {
+                        Object sellerId = lists.get(1);
+                        if (!StringUtils.isEmpty(sellerId)) {
+                            item.setSellerId(sellerId.toString());
+                        }
+                    }
+                    item.setTaskStatus(ItemTaskStatusEnum.WAIT.getCode());
+                    if (itemService.findByItem(item) == null) {
+                        itemService.insert(item);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            logger.debug(e.getMessage(), e);
+        }
+        map.put("code", MsgEnum.SUCCESS.getCode());
+        map.put("msg", MsgEnum.SUCCESS.getMsg());
+        return map;
     }
+
+    @RequestMapping(value = "/createExcel", method = RequestMethod.GET)
+    public void excel(HttpServletRequest request, HttpServletResponse response) {
+        String[] headList = {"商品id", "最低价", "最高价"};
+        String[] fieldList = {"商品id", "最低价", "最高价"};
+        String excel_name = "price.xls";
+        List<Item> items = itemService.findAll(null, null, ItemTaskStatusEnum.SUCCESS.getCode(), 0, 10000);
+        List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < items.size(); i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put(headList[0], items.get(i).getItemId());
+            map.put(headList[1], items.get(i).getMinPrice());
+            map.put(headList[2], items.get(i).getMaxPrice());
+            dataList.add(map);
+        }
+        try {
+            response.setHeader("Content-Type", "application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment;filename=" + excel_name);
+            XSSFWorkbook workbook = excelService.createExcel(excel_name, headList, fieldList, dataList);
+            workbook.write(response.getOutputStream());
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (Exception e) {
+
+        }
+
+    }
+
 }

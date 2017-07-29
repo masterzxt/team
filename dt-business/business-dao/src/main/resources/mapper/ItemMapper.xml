@@ -11,28 +11,54 @@
         <result property="maxPrice" column="max_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
         <result property="createTime" column="create_time" javaType="java.sql.Date" jdbcType="DATE"/>
         <result property="updateTime" column="update_time" javaType="java.sql.Date" jdbcType="DATE"/>
+        <result property="taskStatus" column="task_status" javaType="Integer" jdbcType="INTEGER"/>
     </resultMap>
 
     <insert id="insert" parameterType="com.fight.dt.business.common.beans.Item">
-        INSERT INTO item (id, item_id, seller_id, min_price, max_price,create_time,update_time) values (
-        #{id},#{itemId},#{sellerId},#{minPrice},#{maxPrice},#{createTime},#{updateTime})
+        INSERT INTO item (id, item_id, seller_id, min_price, max_price, task_status, create_time, update_time) VALUES (
+            #{id}, #{itemId}, #{sellerId}, #{minPrice}, #{maxPrice}, #{taskStatus}, #{createTime}, #{updateTime})
     </insert>
 
+    <update id="update" parameterType="com.fight.dt.business.common.beans.Item">
+        UPDATE item
+        <trim prefix="set" suffixOverrides=",">
+            <if test="itemId!=null">`item_id`=#{itemId},</if>
+            <if test="sellerId!=null">`seller_id`=#{sellerId},</if>
+            <if test="minPrice!=null">`min_price`=#{minPrice},</if>
+            <if test="maxPrice!=null">`max_price`=#{maxPrice},</if>
+            <if test="taskStatus!=null">`task_status`=#{taskStatus},</if>
+            <if test="createTime!=null">`create_time`=#{createTime},</if>
+            <if test="updateTime!=null">`update_time`=#{updateTime},</if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
     <select id="findById" parameterType="Integer" resultMap="itemMap">
-        SELECT *
-        FROM item
+        SELECT * FROM item
         <where>
             id = #{id}
         </where>
     </select>
 
     <select id="findByItem" parameterType="com.fight.dt.business.common.beans.Item" resultMap="itemMap">
-        SELECT *
-        FROM item item
+        SELECT * FROM item
         WHERE 1=1
-        <if test="itemId!=null">  and `item_id`=#{itemId}</if>
-        <if test="sellerId!=null">  and `seller_id`=#{sellerId}</if>
+        <if test="id!=null"> and `id`=#{id}</if>
+        <if test="itemId!=null"> and `item_id`=#{itemId}</if>
+        <if test="sellerId!=null"> and `seller_id`=#{sellerId}</if>
+        <if test="taskStatus!=null"> and `task_status`=#{taskStatus}</if>
+        order by `id` desc
         limit 0,1
     </select>
 
+    <select id="findAll" resultMap="itemMap">
+        SELECT * FROM item
+        WHERE 1=1
+        <if test="itemId!=null"> and `item_id`=#{itemId}</if>
+        <if test="sellerId!=null"> and `seller_id`=#{sellerId}</if>
+        <if test="taskStatus!=null"> and `task_status`=#{taskStatus}</if>
+        order by `id` desc
+        <if test="page!=null and pageSize!=null">limit #{page},#{pageSize}</if>
+    </select>
 </mapper>

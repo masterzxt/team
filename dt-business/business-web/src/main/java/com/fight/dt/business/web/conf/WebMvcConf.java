@@ -19,6 +19,7 @@ public class WebMvcConf extends WebMvcConfigurerAdapter {
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/talk").setViewName("talk");
+        registry.addViewController("/excel").setViewName("excel");
     }
 
     @Override
@@ -27,5 +28,6 @@ public class WebMvcConf extends WebMvcConfigurerAdapter {
         registry.addMapping("/login");
         registry.addMapping("/talk");
         registry.addMapping("/reg");
+        registry.addMapping("/excel");
     }
 }
